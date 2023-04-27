@@ -25,8 +25,10 @@ export default function Navbar() {
     <>
       <nav className='bg-sky-400 md:px-2'>
         <div className='w-full h-24 box-border antialiased flex md:flex-row flex-col justify-between md:pl-2 py-1'>
-          <div className='grid px-20 pb-1 lg:px-40 place-content-center flex-1 md:flex-none'>
-            <h1 className='text-5xl font-dancing'>Shiganime.</h1>
+          <div className='grid px-20 pb-1 place-content-center flex-1 md:flex-none'>
+            <Link to='/'>
+              <h1 className='text-5xl font-dancing'>Shiganime.</h1>
+            </Link>
           </div>
           <div className='flex md:flex-1 justify-between items-center '>
             <div
