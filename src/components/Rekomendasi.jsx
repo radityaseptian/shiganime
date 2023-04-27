@@ -17,7 +17,7 @@ export default function Rekomendasi({
     <>
       <div className='text-sm lg:text-md shadow-md'>
         <div className='flex h-[2.3rem] text-white items-center shadow-md justify-between w-full rounded-t-md px-4 bg-sky-500 py-2'>
-          <h3>Rekomendasi</h3>
+          <h3>Recommendation</h3>
           <BsFillCalendarHeartFill />
         </div>
         <div className='overflow-hidden p-2 bg-slate-200'>

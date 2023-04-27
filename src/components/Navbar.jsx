@@ -45,7 +45,7 @@ export default function Navbar() {
                 onKeyDown={search}
                 onChange={(e) => setValue(e.target.value)}
                 type='text'
-                placeholder='masukan judul...'
+                placeholder='Search anime...'
                 className='text-xs sm:text-sm w-full h-8 focus:outline-none focus:rounded focus:border-[1px] border-slate-500 pl-2 pr-10'
               />
               <FiSearch
