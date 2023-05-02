@@ -61,7 +61,7 @@ export default function AnimeWatch() {
     <>
       <div className='bg-slate-100'>
         <Navbar />
-        <div className='bg-slate-200 mx-auto max-w-6xl p-2 mt-2 shadow-sm shadow-slate-400'>
+        <div className='containerbg-slate-200 mx-auto max-w-6xl p-2 mt-2 shadow-sm shadow-slate-400'>
           <div className='bg-sky-400 mb-2 p-2 antialiased'>
             <h1>{id}</h1>
           </div>
@@ -90,7 +90,9 @@ export default function AnimeWatch() {
             </ul>
           </div>
         </div>
-        <Footer bgColor='bg-slate-100' />
+        <div className='container mx-auto max-w-6xl'>
+          <Footer />
+        </div>
       </div>
     </>
   )

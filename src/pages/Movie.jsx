@@ -38,15 +38,17 @@ export default function Movie() {
     <>
       <div className='bg-slate-100'>
         <Navbar />
-        <RekomendasiContext.Provider value={rekomendasi}>
-          <Content
-            value={movie}
-            pageCount={105}
-            url={url}
-            title={'Anime Movie'}
-          />
-        </RekomendasiContext.Provider>
-        <Footer bgColor='bg-slate-100' />
+        <div className='container mx-auto max-w-6xl'>
+          <RekomendasiContext.Provider value={rekomendasi}>
+            <Content
+              value={movie}
+              pageCount={105}
+              url={url}
+              title={'Anime Movie'}
+            />
+          </RekomendasiContext.Provider>
+          <Footer />
+        </div>
       </div>
     </>
   )

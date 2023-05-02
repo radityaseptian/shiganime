@@ -38,17 +38,20 @@ export default function Home() {
     <>
       <div className='bg-slate-100'>
         <Navbar />
-        <RekomendasiContext.Provider value={rekomendasi}>
-          <Content
-            value={recent}
-            pageCount={373}
-            url={url}
-            title={'Anime On-going'}
-            linkHome={true}
-          />
-        </RekomendasiContext.Provider>
-        <Footer bgColor='bg-slate-100' />
+        <div className='container mx-auto max-w-6xl'>
+          <RekomendasiContext.Provider value={rekomendasi}>
+            <Content
+              value={recent}
+              pageCount={373}
+              url={url}
+              title={'Anime On-going'}
+              linkHome={true}
+            />
+          </RekomendasiContext.Provider>
+          <Footer />
+        </div>
       </div>
     </>
   )
 }
+//

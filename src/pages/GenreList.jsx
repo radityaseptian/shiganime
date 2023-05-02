@@ -13,11 +13,11 @@ export default function GenreList() {
     document.title = 'Genre Anime List'
   }, [])
   const initRekomendasi = async () => {
-    await fetch('https://gogoanime.consumet.stream/popular',{
+    await fetch('https://gogoanime.consumet.stream/popular', {
       method: 'GET',
       headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
+        'Access-Control-Allow-Origin': '*',
+      },
     })
       .then((res) => res.json())
       .then((res) => setRekomendasi(res))
@@ -27,7 +27,7 @@ export default function GenreList() {
     <>
       <div className='bg-slate-100'>
         <Navbar />
-        <div className='max-w-7xl lg:flex mx-auto'>
+        <div className='max-w-6xl lg:flex mx-auto'>
           <div>
             <div className='bg-sky-500 mt-2'>
               <h1 className='p-2 px-3'>Genre List</h1>
@@ -417,7 +417,9 @@ export default function GenreList() {
             </RekomendasiContext.Provider>
           </div>
         </div>
-        <Footer bgColor='bg-slate-100' />
+        <div className='mx-auto container max-w-6xl'>
+          <Footer />
+        </div>
       </div>
     </>
   )

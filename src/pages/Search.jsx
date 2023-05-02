@@ -45,10 +45,12 @@ export default function Search() {
     <>
       <div className='bg-slate-100'>
         <Navbar />
-        <RekomendasiContext.Provider value={rekomendasi}>
-          <Content value={search} title={`Search: ${param}`} />
-        </RekomendasiContext.Provider>
-        <Footer bgColor='bg-slate-100' />
+        <div className='container mx-auto max-w-6xl'>
+          <RekomendasiContext.Provider value={rekomendasi}>
+            <Content value={search} title={`Search: ${param}`} />
+          </RekomendasiContext.Provider>
+          <Footer />
+        </div>
       </div>
     </>
   )
