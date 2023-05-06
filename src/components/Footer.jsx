@@ -57,7 +57,7 @@ export default function Footer() {
                 <FaFacebookF />
               </a>
               <a
-                href='https://twitter.com/'
+                href='https://github.com/'
                 target='_blank'
                 rel='noreferrer'
                 className='p-2 hover:bg-black/10 rounded-full'
