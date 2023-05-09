@@ -13,22 +13,12 @@ export default function Search() {
   const url = `https://gogoanime.consumet.stream/search?keyw=${param}`
 
   const initSearch = async () => {
-    await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    await fetch(url)
       .then((res) => res.json())
       .then((res) => setSearch(res))
   }
   const initRekomendasi = async () => {
-    await fetch('https://gogoanime.consumet.stream/popular', {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    await fetch('https://gogoanime.consumet.stream/popular')
       .then((res) => res.json())
       .then((res) => setRekomendasi(res))
   }

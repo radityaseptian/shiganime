@@ -13,12 +13,7 @@ export default function GenreList() {
     document.title = 'Genre Anime List'
   }, [])
   const initRekomendasi = async () => {
-    await fetch('https://gogoanime.consumet.stream/popular', {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    await fetch('https://gogoanime.consumet.stream/popular')
       .then((res) => res.json())
       .then((res) => setRekomendasi(res))
       .finally(() => setLoading(false))

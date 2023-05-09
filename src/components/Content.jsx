@@ -26,19 +26,14 @@ export default function Content({
   }, [page])
 
   const handleChange = async (never, number = '1') => {
-    await fetch(`${url}?page=${number}`, {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    await fetch(`${url}?page=${number}`)
       .then((res) => res.json())
       .then((res) => {
         if (res.error) {
           setData([])
           setError([
             true,
-            'Halaman tidak ditemukan, silahkan kembali ke halaman sebelumnya',
+            'Page not found, please return to the previous page.',
           ])
         } else {
           setError([false])

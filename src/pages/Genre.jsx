@@ -30,12 +30,7 @@ export default function Movie() {
       .then((res) => setGenre(res))
   }
   const initRekomendasi = async () => {
-    await fetch('https://gogoanime.consumet.stream/popular', {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    await fetch('https://gogoanime.consumet.stream/popular')
       .then((res) => res.json())
       .then((res) => setRekomendasi(res))
   }

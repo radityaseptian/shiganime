@@ -15,22 +15,12 @@ export default function Home() {
     document.title = 'Shiganime - Watch Anime Online'
   }, [])
   const initRecent = async () => {
-    await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    await fetch(url)
       .then((res) => res.json())
       .then((res) => setRecent(res))
   }
   const initRekomendasi = async () => {
-    await fetch('https://gogoanime.consumet.stream/popular', {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    await fetch('https://gogoanime.consumet.stream/popular')
       .then((res) => res.json())
       .then((res) => setRekomendasi(res))
   }

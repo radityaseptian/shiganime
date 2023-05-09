@@ -23,22 +23,12 @@ export default function AnimeWatch() {
     document.title = `Watch - ${id}`
   }, [])
   const getAnimeDetails = async () => {
-    await fetch(urlAnimeDetails, {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    await fetch(urlAnimeDetails)
       .then((res) => res.json())
       .then((res) => setListEpisodes(res.episodesList))
   }
   const initRequest = async () => {
-    await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    await fetch(url)
       .then((res) => res.json())
       .then((res) => setRequest(res.sources_bk[0].file))
       .finally(() => setLoading(false))

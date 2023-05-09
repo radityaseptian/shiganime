@@ -15,22 +15,12 @@ export default function Movie() {
     document.title = 'Movie Anime List'
   }, [])
   const initMovie = async () => {
-    await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    await fetch(url)
       .then((res) => res.json())
       .then((res) => setMovie(res))
   }
   const initRekomendasi = async () => {
-    await fetch('https://gogoanime.consumet.stream/popular', {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    await fetch('https://gogoanime.consumet.stream/popular')
       .then((res) => res.json())
       .then((res) => setRekomendasi(res))
   }
