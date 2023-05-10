@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-hooks/rules-of-hooks */
 import Navbar from '../components/Navbar'
 import Content from '../components/Content'
 import Footer from '../components/Footer'

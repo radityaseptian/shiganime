@@ -1,6 +1,3 @@
-/* eslint-disable no-cond-assign */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom'
 import Loading from './Loading'
 

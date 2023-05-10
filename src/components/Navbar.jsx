@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { BiArrowToTop } from 'react-icons/bi'
 import { FiSearch } from 'react-icons/fi'
 import { useState } from 'react'

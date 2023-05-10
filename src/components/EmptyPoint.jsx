@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import Rekomendasi from './Rekomendasi'
 
 export default function EmptyPoint({className, loading}) {

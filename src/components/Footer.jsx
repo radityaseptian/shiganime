@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { FaFacebookF, FaGithub } from 'react-icons/fa'
 import FootList from './FootList'
 

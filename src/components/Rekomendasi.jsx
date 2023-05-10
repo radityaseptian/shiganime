@@ -1,6 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-const-assign */
 import { BsFillCalendarHeartFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'

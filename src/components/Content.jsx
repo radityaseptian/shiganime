@@ -1,7 +1,3 @@
-/* eslint-disable no-const-assign */
-/* eslint-disable use-isnan */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/prop-types */
 import { Pagination } from '@mui/material'
 import Card, { CardSearch } from './Card'
 import Rekomendasi from './Rekomendasi'
