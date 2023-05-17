@@ -18,6 +18,7 @@ export default function App() {
         <Route path='genre/:id' element={<Genre />} />
         <Route path='movie' element={<Movie />} />
         <Route path='genre-list' element={<GenreList />} />
+        <Route path='*' element={<Home />} />
       </Routes>
     </>
   )
