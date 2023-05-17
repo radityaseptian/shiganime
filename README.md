@@ -2,7 +2,7 @@
   Shiganime - Streaming Anime Subtitle English <br/>
   <!-- <a href="WAIT" target="_blank">PORTOFOLIO</a> -->
 </h2>
-This website using public api from <a href='https://github.com/riimuru/gogoanime-api'>Gogoanime-api</a>
+This website using public api from <a target='_blank' href='https://github.com/riimuru/gogoanime-api'>Gogoanime-api</a>
 
 ## Built With
 
