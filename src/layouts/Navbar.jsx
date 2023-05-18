@@ -2,7 +2,6 @@ import { BiArrowToTop } from 'react-icons/bi'
 import { FiSearch } from 'react-icons/fi'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { document } from 'postcss'
 
 export default function Navbar() {
   const [slider, setSlider] = useState(false)
@@ -123,8 +122,10 @@ function NavBottom() {
 
 function BackToTop() {
   const toTop = () => {
-    document.body.scrollTop = 0
-    document.documentElement.scrollTop = 0
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   }
   return (
     <>
