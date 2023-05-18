@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useParams, Link } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import Navbar from '../layouts/Navbar'
+import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
 import { RekomendasiContext } from '../context/RekomendasiContext'
-import EmptyPoint from '../components/EmptyPoint'
+import Rekomendasi from '../layouts/Rekomendasi'
 import { LoadingAnimeDetail } from '../components/Loading'
 
 export default function Anime() {
@@ -109,11 +110,7 @@ export default function Anime() {
               </ul>
             </div>
             <RekomendasiContext.Provider value={rekomendasi}>
-              <EmptyPoint
-                className='flex flex-wrap gap-1 lg:grid lg:grid-cols-7'
-                refresh={true}
-                loading={loading}
-              />
+              <Rekomendasi className={'grid-cols-7'} loading={loading} />
             </RekomendasiContext.Provider>
           </div>
         </div>

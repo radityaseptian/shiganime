@@ -1,5 +1,5 @@
 import { FaFacebookF, FaGithub } from 'react-icons/fa'
-import FootList from './FootList'
+import FootList from '../components/FootList'
 
 export default function Footer() {
   return (
@@ -41,8 +41,8 @@ export default function Footer() {
               <FootList>No one 😅</FootList>
             </ul>
           </div>
-          <div className='mt-3 md:mt-0 lg:pl-20'>
-            <span className='py-2 lg:py-4 font-patua'>Stay Conected</span>
+          <div className='mt-3 md:mt-0 flex flex-col items-center'>
+            <span className='font-patua'>Stay Conected</span>
             <p className='text-[#0e144a9f] text-sm lg:text-base leading-6 py-2'>
               Find me on social media:
             </p>

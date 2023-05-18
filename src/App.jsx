@@ -1,11 +1,11 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route,Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 import Anime from './pages/Anime'
 import AnimeWatch from './pages/AnimeWatch'
 import Search from './pages/Search'
 import Genre from './pages/Genre.jsx'
 import Movie from './pages/Movie'
-import GenreList from './pages/GenreList'
+import GenresList from './pages/GenresList'
 
 export default function App() {
   return (
@@ -17,8 +17,8 @@ export default function App() {
         <Route path='anime/:id' element={<Anime />} />
         <Route path='genre/:id' element={<Genre />} />
         <Route path='movie' element={<Movie />} />
-        <Route path='genre-list' element={<GenreList />} />
-        <Route path='*' element={<Home />} />
+        <Route path='genres-list' element={<GenresList />} />
+        <Route path='*' element={<Navigate to='/' />} />
       </Routes>
     </>
   )

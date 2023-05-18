@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 export default function FootList({ children }) {
   return (
     <>

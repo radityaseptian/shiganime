@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useParams } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import Navbar from '../layouts/Navbar'
+import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
 import Video from '../components/Video'
 import { LoadingVideoAnime } from '../components/Loading'

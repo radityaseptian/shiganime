@@ -1,6 +1,7 @@
-import Navbar from '../components/Navbar'
-import Content from '../components/Content'
-import Footer from '../components/Footer'
+/* eslint-disable react-hooks/exhaustive-deps */
+import Navbar from '../layouts/Navbar'
+import Content from '../layouts/Content'
+import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
 import { RekomendasiContext } from '../context/RekomendasiContext'
 import { useParams } from 'react-router-dom'
@@ -18,12 +19,7 @@ export default function Movie() {
     document.title = `Genre - ${id}`
   }, [])
   const initGenre = async () => {
-    await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    await fetch(url)
       .then((res) => res.json())
       .then((res) => setGenre(res))
   }

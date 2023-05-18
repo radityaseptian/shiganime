@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom'
 import Loading from './Loading'
+import { arrayLength } from '../arrayLength'
 
 export default function Card({ value, error, loading, linkHome = false }) {
   return (
@@ -8,26 +10,9 @@ export default function Card({ value, error, loading, linkHome = false }) {
         {error[0] && <h1>{error[1]}</h1>}
         {loading ? (
           <>
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
+            {arrayLength(19).map((i) => {
+              return <Loading key={i} style={'w-24 h-32 md:w-28 md:h-36'} />
+            })}
           </>
         ) : (
           value.map((list) => {
@@ -82,26 +67,9 @@ export function CardSearch({ value, loading }) {
       <ul className='text-xs md:text-sm grid md:grid-cols-2 p-2 gap-2 lg:text-md w-full bg-slate-200'>
         {loading ? (
           <>
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
-            <Loading style={'w-24 h-32 md:w-28 md:h-36'} />
+            {arrayLength(19).map((i) => {
+              return <Loading key={i} style={'w-24 h-32 md:w-28 md:h-36'} />
+            })}
           </>
         ) : (
           value.map((list) => {

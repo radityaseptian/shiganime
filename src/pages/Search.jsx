@@ -1,6 +1,7 @@
-import Navbar from '../components/Navbar'
-import Content from '../components/Content'
-import Footer from '../components/Footer'
+/* eslint-disable react-hooks/exhaustive-deps */
+import Navbar from '../layouts/Navbar'
+import Content from '../layouts/Content'
+import Footer from '../layouts/Footer'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { RekomendasiContext } from '../context/RekomendasiContext'

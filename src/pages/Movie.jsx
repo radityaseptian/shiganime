@@ -1,6 +1,6 @@
-import Navbar from '../components/Navbar'
-import Content from '../components/Content'
-import Footer from '../components/Footer'
+import Navbar from '../layouts/Navbar'
+import Content from '../layouts/Content'
+import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
 import { RekomendasiContext } from '../context/RekomendasiContext'
 

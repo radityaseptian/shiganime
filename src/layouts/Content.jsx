@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 import { Pagination } from '@mui/material'
-import Card, { CardSearch } from './Card'
+import Card, { CardSearch } from '../components/Card'
 import Rekomendasi from './Rekomendasi'
 import { useEffect, useState } from 'react'
 
@@ -21,7 +23,7 @@ export default function Content({
     document.documentElement.scrollTop = 0
   }, [page])
 
-  const handleChange = async (never, number = '1') => {
+  const handleChange = async (empty, number = '1') => {
     await fetch(`${url}?page=${number}`)
       .then((res) => res.json())
       .then((res) => {
