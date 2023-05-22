@@ -1,24 +1,14 @@
 import { Link } from 'react-router-dom'
 import Navbar from '../layouts/Navbar'
 import Footer from '../layouts/Footer'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Rekomendasi from '../layouts/Rekomendasi'
-import { RekomendasiContext } from '../context/RekomendasiContext'
 import { genres } from '../genres'
 
 export default function GenreList() {
-  const [rekomendasi, setRekomendasi] = useState([])
-  const [loading, setLoading] = useState(true)
   useEffect(() => {
-    initRekomendasi()
-    document.title = 'Genre Anime List'
+    document.title = 'Genres List'
   }, [])
-  const initRekomendasi = async () => {
-    await fetch('https://gogoanime.consumet.stream/popular')
-      .then((res) => res.json())
-      .then((res) => setRekomendasi(res))
-      .finally(() => setLoading(false))
-  }
   return (
     <>
       <div className='bg-slate-100'>
@@ -46,9 +36,7 @@ export default function GenreList() {
             </ul>
           </div>
           <div className='lg:w-full p-2'>
-            <RekomendasiContext.Provider value={rekomendasi}>
-              <Rekomendasi loading={loading} />
-            </RekomendasiContext.Provider>
+            <Rekomendasi />
           </div>
         </div>
         <div className='mx-auto container max-w-6xl'>

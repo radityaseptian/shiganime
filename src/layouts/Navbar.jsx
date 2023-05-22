@@ -16,9 +16,6 @@ export default function Navbar() {
       }
     }
   }
-  const show = () => {
-    slider ? setSlider(false) : setSlider(true)
-  }
   return (
     <>
       <nav className='bg-sky-400 md:px-2'>
@@ -30,7 +27,7 @@ export default function Navbar() {
           </div>
           <div className='flex md:flex-1 justify-between items-center '>
             <div
-              onClick={show}
+              onClick={() => setSlider(!slider)}
               className='flex flex-col md:hidden bg-sky-500 p-2 rounded gap-1 cursor-pointer mx-4'
             >
               <span className='h-1 w-7 rounded bg-white'></span>

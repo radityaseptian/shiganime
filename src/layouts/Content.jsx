@@ -75,7 +75,7 @@ export default function Content({
         </main>
 
         <div className='mt-2 mx-2 lg:mx-0 lg:mr-4 lg:mt-0 lg:w-3/12 text-slate-50'>
-          <Rekomendasi loading={loading} />
+          <Rekomendasi />
         </div>
       </div>
     </>

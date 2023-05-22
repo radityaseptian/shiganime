@@ -3,31 +3,22 @@ import { useParams, Link } from 'react-router-dom'
 import Navbar from '../layouts/Navbar'
 import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
-import { RekomendasiContext } from '../context/RekomendasiContext'
 import Rekomendasi from '../layouts/Rekomendasi'
 import { LoadingAnimeDetail } from '../components/Loading'
 
 export default function Anime() {
   const [anime, setAnime] = useState({})
-  const [rekomendasi, setRekomendasi] = useState([])
   const [loading, setLoading] = useState(true)
   const { id } = useParams()
-  const url = `https://gogoanime.consumet.stream/anime-details/${id}`
+  const url = `${import.meta.url}/anime-details/${id}`
   const initAnime = async () => {
     await fetch(url)
       .then((res) => res.json())
       .then((res) => setAnime(res))
       .finally(() => setLoading(false))
   }
-  const initRekomendasi = async () => {
-    await fetch('https://gogoanime.consumet.stream/popular')
-      .then((res) => res.json())
-      .then((res) => setRekomendasi(res))
-      .finally(() => setLoading(false))
-  }
   useEffect(() => {
     initAnime()
-    initRekomendasi()
     document.title = `Anime - ${id}`
   }, [])
   return (
@@ -109,9 +100,7 @@ export default function Anime() {
                   })}
               </ul>
             </div>
-            <RekomendasiContext.Provider value={rekomendasi}>
-              <Rekomendasi className={'grid-cols-7'} loading={loading} />
-            </RekomendasiContext.Provider>
+            <Rekomendasi className={'grid-cols-7'} />
           </div>
         </div>
       </div>

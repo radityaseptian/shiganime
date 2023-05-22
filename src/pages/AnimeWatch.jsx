@@ -11,11 +11,11 @@ export default function AnimeWatch() {
   const [loading, setLoading] = useState(true)
   const [listEpisodes, setListEpisodes] = useState([])
   const { id } = useParams()
-  const url = `https://gogoanime.consumet.stream/vidcdn/watch/${id}`
+  const url = `${import.meta.url}/vidcdn/watch/${id}`
   const animeVideoList = id.split('-')
   animeVideoList.pop()
   animeVideoList.pop()
-  const urlAnimeDetails = `https://gogoanime.consumet.stream/anime-details/${animeVideoList}`
+  const urlAnimeDetails = `${import.meta.url}/anime-details/${animeVideoList}`
 
   useEffect(() => {
     initRequest()

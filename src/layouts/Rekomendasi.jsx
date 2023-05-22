@@ -5,7 +5,7 @@ import { RekomendasiContext } from '../context/RekomendasiContext'
 import { LoadingRekomendasi } from '../components/Loading'
 import { arrayLength } from '../arrayLength'
 
-export default function Rekomendasi({ className = 'lg:grid-cols-2', loading }) {
+export default function Rekomendasi({ className = 'lg:grid-cols-2' }) {
   const context = useContext(RekomendasiContext)
   return (
     <>
@@ -15,15 +15,17 @@ export default function Rekomendasi({ className = 'lg:grid-cols-2', loading }) {
           <BsFillCalendarHeartFill />
         </div>
         <div className='overflow-hidden p-2 bg-slate-200'>
-          <ul className={`${className} flex flex-wrap justify-evenly gap-1 lg:grid`}>
-            {loading || context.loading ? (
+          <ul
+            className={`${className} flex flex-wrap justify-evenly gap-1 lg:grid`}
+          >
+            {context.loading ? (
               <>
                 {arrayLength(19).map((i) => {
                   return <LoadingRekomendasi key={i} />
                 })}
               </>
             ) : (
-              context.map((list) => {
+              context.values.map((list) => {
                 return (
                   <li
                     key={list.animeId}
