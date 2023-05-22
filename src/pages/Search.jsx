@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom'
 export default function Search() {
   const [search, setSearch] = useState([])
   const { param } = useParams()
-  const url = `${import.meta.url}/search?keyw=${param}`
+  const url = `${import.meta.env.VITE_URL}/search?keyw=${param}`
 
   const initSearch = async () => {
     await fetch(url)

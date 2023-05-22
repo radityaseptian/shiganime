@@ -9,7 +9,7 @@ export default function Movie() {
   const [genre, setGenre] = useState([])
 
   const { id } = useParams()
-  const url = `${import.meta.url}/genre/${id}`
+  const url = `${import.meta.env.VITE_URL}/genre/${id}`
 
   useEffect(() => {
     initGenre()

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 export default function Movie() {
   const [movie, setMovie] = useState([])
-  const url = `${import.meta.url}/anime-movies`
+  const url = `${import.meta.env.VITE_URL}/anime-movies`
 
   useEffect(() => {
     initMovie()

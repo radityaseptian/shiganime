@@ -10,7 +10,7 @@ export default function Anime() {
   const [anime, setAnime] = useState({})
   const [loading, setLoading] = useState(true)
   const { id } = useParams()
-  const url = `${import.meta.url}/anime-details/${id}`
+  const url = `${import.meta.env.VITE_URL}/anime-details/${id}`
   const initAnime = async () => {
     await fetch(url)
       .then((res) => res.json())
@@ -25,7 +25,7 @@ export default function Anime() {
     <>
       <Navbar />
       <div className='container mx-auto max-w-6xl'>
-        <div className='bg-slate-200 pt-2 text-xs sm:text-sm lg:text-md'>
+        <div className='pt-2 text-xs sm:text-sm lg:text-md'>
           <div className='bg-slate-100 mx-auto max-w-5xl p-2'>
             <div className='bg-sky-400 py-2 text-center'>
               <h1>Streaming {anime.animeTitle}</h1>

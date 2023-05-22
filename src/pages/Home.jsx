@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 export default function Home() {
   const [recent, setRecent] = useState([])
-  const url = `${import.meta.url}/recent-release`
+  const url = `${import.meta.env.VITE_URL}/recent-release`
 
   useEffect(() => {
     initRecent()

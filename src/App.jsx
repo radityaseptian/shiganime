@@ -1,4 +1,5 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom'
 import Home from './pages/Home'
 import Anime from './pages/Anime'
 import AnimeWatch from './pages/AnimeWatch'
@@ -10,29 +11,31 @@ import { useEffect, useState } from 'react'
 import { RekomendasiContext } from './context/RekomendasiContext'
 
 export default function App() {
+  const url = import.meta.env.VITE_URL
   const [rekomendasi, setRekomendasi] = useState({ loading: true, values: [] })
   const initRekomendasi = async () => {
-    await fetch(`${import.meta.url}/popular`)
+    await fetch(`${url}/popular`)
       .then((res) => res.json())
       .then((res) => setRekomendasi({ loading: false, values: res }))
   }
   useEffect(() => {
     initRekomendasi()
   }, [])
-
   return (
     <>
       <RekomendasiContext.Provider value={rekomendasi}>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='anime/watch/:id' element={<AnimeWatch />} />
-          <Route path='search/:param' element={<Search />} />
-          <Route path='anime/:id' element={<Anime />} />
-          <Route path='movie' element={<Movie />} />
-          <Route path='genres-list' element={<GenresList />} />
-          <Route path='genre/:id' element={<Genre />} />
-          <Route path='*' element={<Navigate to='/' />} />
-        </Routes>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='anime/watch/:id' element={<AnimeWatch />} />
+            <Route path='search/:param' element={<Search />} />
+            <Route path='anime/:id' element={<Anime />} />
+            <Route path='movie' element={<Movie />} />
+            <Route path='genres-list' element={<GenresList />} />
+            <Route path='genre/:id' element={<Genre />} />
+            <Route path='*' element={<Navigate to='/' />} />
+          </Routes>
+        </BrowserRouter>
       </RekomendasiContext.Provider>
     </>
   )

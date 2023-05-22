@@ -60,8 +60,8 @@ export default function Navbar() {
 
 function NavSlider() {
   return (
-    <div className='text-sm py-2 md:hidden bg-sky-500 text-white [&>ul>li]:p-2'>
-      <ul>
+    <div className='text-sm p-2 md:hidden bg-sky-500 text-white [&>ul>li]:py-2'>
+      <ul className='overflow-hidden'>
         <li>
           <Link to='/' className='pr-[100%] box-content p-2 hover:bg-sky-400'>
             Home
@@ -69,7 +69,7 @@ function NavSlider() {
         </li>
         <li>
           <Link
-            to='/genre-list'
+            to='/genres-list'
             className='pr-[100%] box-content p-2 hover:bg-sky-400'
           >
             Genre
@@ -98,7 +98,7 @@ function NavBottom() {
         </li>
         <li className='flex-1 text-center overflow-hidden'>
           <Link
-            to='/genre-list'
+            to='/genres-list'
             className='py-2 block hover:bg-sky-600 hover:text-white'
           >
             Genre
