@@ -12,6 +12,7 @@ export default function Anime() {
   const { id } = useParams()
   const url = `${import.meta.env.VITE_URL}/anime-details/${id}`
   const initAnime = async () => {
+    setLoading(true)
     await fetch(url)
       .then((res) => res.json())
       .then((res) => setAnime(res))
@@ -19,8 +20,13 @@ export default function Anime() {
   }
   useEffect(() => {
     initAnime()
+    RefeshToTop()
     document.title = `Anime - ${id}`
-  }, [])
+  }, [id])
+  const RefeshToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <>
       <Navbar />

@@ -1,6 +1,6 @@
 import { BiArrowToTop } from 'react-icons/bi'
 import { FiSearch } from 'react-icons/fi'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function Navbar() {
@@ -124,6 +124,9 @@ function BackToTop() {
       behavior: 'smooth',
     })
   }
+  useEffect(() => {
+    toTop()
+  }, [])
   return (
     <>
       <BiArrowToTop

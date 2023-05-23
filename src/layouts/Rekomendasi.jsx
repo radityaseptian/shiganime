@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import { RekomendasiContext } from '../context/RekomendasiContext'
 import { LoadingRekomendasi } from '../components/Loading'
 import { arrayLength } from '../arrayLength'
+import { Link } from 'react-router-dom'
 
 export default function Rekomendasi({ className = 'lg:grid-cols-2' }) {
   const context = useContext(RekomendasiContext)
@@ -31,7 +32,7 @@ export default function Rekomendasi({ className = 'lg:grid-cols-2' }) {
                     key={list.animeId}
                     className='relative w-32 h-44 lg:w-full overflow-hidden flex-initial'
                   >
-                    <a href={`/anime/${list.animeId}`}>
+                    <Link to={`/anime/${list.animeId}`}>
                       <img
                         src={list.animeImg}
                         alt={list.animeTitle}
@@ -40,7 +41,7 @@ export default function Rekomendasi({ className = 'lg:grid-cols-2' }) {
                       <span className='text-xs text-white absolute right-0 bottom-0 left-0 sm:text-md lg:text-sm text-center bg-black/50 py-1'>
                         {list.animeTitle}
                       </span>
-                    </a>
+                    </Link>
                   </li>
                 )
               })

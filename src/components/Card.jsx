@@ -10,7 +10,7 @@ export default function Card({ value, error, loading, linkHome = false }) {
         {error[0] && <h1>{error[1]}</h1>}
         {loading ? (
           <>
-            {arrayLength(19).map((i) => {
+            {arrayLength(20).map((i) => {
               return <Loading key={i} style={'w-24 h-32 md:w-28 md:h-36'} />
             })}
           </>
@@ -67,7 +67,7 @@ export function CardSearch({ value, loading }) {
       <ul className='text-xs md:text-sm grid md:grid-cols-2 p-2 gap-2 lg:text-md w-full bg-slate-200'>
         {loading ? (
           <>
-            {arrayLength(19).map((i) => {
+            {arrayLength(20).map((i) => {
               return <Loading key={i} style={'w-24 h-32 md:w-28 md:h-36'} />
             })}
           </>
