@@ -5,6 +5,7 @@ import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
 import Video from '../components/Video'
 import { LoadingVideoAnime } from '../components/Loading'
+import { Link } from 'react-router-dom'
 
 export default function AnimeWatch() {
   const [request, setRequest] = useState('')
@@ -18,12 +19,18 @@ export default function AnimeWatch() {
   const urlAnimeDetails = `${
     import.meta.env.VITE_URL
   }/anime-details/${animeVideoList.join('-')}`
+  
+  const RefreshToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   useEffect(() => {
+    RefreshToTop()
     getAnimeWatch()
     document.title = `Watch - ${id.split('-').join(' ')}`
-  }, [])
+  }, [id])
   async function getAnimeWatch() {
+    setLoading(true)
     try {
       // VIDEO ANIME
       const res = await fetch(url)
@@ -71,12 +78,12 @@ export default function AnimeWatch() {
                   return (
                     <>
                       <li key={i} className='pt-1'>
-                        <a
-                          href={`/anime/watch/${list.episodeId}`}
+                        <Link
+                          to={`/anime/watch/${list.episodeId}`}
                           className='py-1 pl-2 block bg-sky-300 hover:bg-sky-400 hover:underline'
                         >
                           Episode {list.episodeNum}
-                        </a>
+                        </Link>
                       </li>
                     </>
                   )
