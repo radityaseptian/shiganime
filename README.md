@@ -1,7 +1,9 @@
 <h2 align="center">
   Shiganime - Streaming Anime Subtitle English <br/>
-  <!-- <a href="WAIT" target="_blank">PORTOFOLIO</a> -->
+  <a href="https://radityaseptian.vercel.app">MY PERSONAL PORTOFOLIO</a>
 </h2>
+![Previews](https://radityaseptian.vercel.app/assets/shiganime-e26b6d71.png)
+
 This website using public api from <a href='https://github.com/riimuru/gogoanime-api'>Gogoanime-api</a>
 
 ## Built With
