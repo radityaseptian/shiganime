@@ -1,8 +1,8 @@
 <h2 align="center">
   Shiganime - Streaming Anime Subtitle English <br/>
-  <a href="https://radityaseptian.vercel.app">MY PERSONAL PORTOFOLIO</a>
 </h2>
-![Previews](https://radityaseptian.vercel.app/assets/shiganime-e26b6d71.png)
+
+<img src='./public/shiganime.png'>
 
 This website using public api from <a href='https://github.com/riimuru/gogoanime-api'>Gogoanime-api</a>
 
@@ -23,9 +23,11 @@ Clone down this repository. You will need `node.js` and `git` installed globally
 
 ## 🛠 Installation and Setup Instructions
 
-1. Installation: `npm install`
+1. Clone this repository `git clone https://github.com/radityaseptian/shiganime.git`
 
-2. In the project directory, you can run: `npm start`
+2. Installation: `npm install`
+
+3. In the project directory, you can run: `npm start`
 
 Runs the app in the development mode.
 Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
