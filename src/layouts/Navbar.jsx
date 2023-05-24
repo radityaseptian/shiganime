@@ -131,7 +131,7 @@ function BackToTop() {
     <>
       <BiArrowToTop
         onClick={toTop}
-        className='scroll-smooth z-50 p-3 sm:p-4 fixed bottom-3 right-3 rounded-md cursor-pointer box-content bg-black/10 hover:bg-black/20'
+        className='scroll-smooth z-50 p-3 sm:p-4 fixed bottom-6 right-6 rounded-md cursor-pointer box-content bg-black/20 hover:bg-black/30'
       />
     </>
   )
