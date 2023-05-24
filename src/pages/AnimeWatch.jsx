@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Navbar from '../layouts/Navbar'
 import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
@@ -8,6 +8,7 @@ import { LoadingVideoAnime } from '../components/Loading'
 import { Link } from 'react-router-dom'
 
 export default function AnimeWatch() {
+  const navigate = useNavigate()
   const [request, setRequest] = useState('')
   const [loading, setLoading] = useState(true)
   const [listEpisodes, setListEpisodes] = useState([])
@@ -19,7 +20,7 @@ export default function AnimeWatch() {
   const urlAnimeDetails = `${
     import.meta.env.VITE_URL
   }/anime-details/${animeVideoList.join('-')}`
-  
+
   const RefreshToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -29,6 +30,28 @@ export default function AnimeWatch() {
     getAnimeWatch()
     document.title = `Watch - ${id.split('-').join(' ')}`
   }, [id])
+
+  const next = () => {
+    const lastEpisode = listEpisodes[0].episodeNum
+    const episode = id.split('-')
+    const currentEpisode = episode[episode.length - 1]
+    if (currentEpisode != lastEpisode) {
+      let next = episode.filter((list) => list != currentEpisode)
+      next.push((Number(currentEpisode) + 1).toString())
+      navigate(`/anime/watch/${next.join('-')}`)
+    }
+  }
+  const previous = () => {
+    const firstEpisode = listEpisodes[listEpisodes.length - 1].episodeNum
+    const episode = id.split('-')
+    const currentEpisode = episode[episode.length - 1]
+    if (currentEpisode != firstEpisode) {
+      let next = episode.filter((list) => list != currentEpisode)
+      next.push((Number(currentEpisode) - 1).toString())
+      navigate(`/anime/watch/${next.join('-')}`)
+    }
+  }
+
   async function getAnimeWatch() {
     setLoading(true)
     try {
@@ -63,8 +86,22 @@ export default function AnimeWatch() {
       <div className='bg-slate-100'>
         <Navbar />
         <div className='containerbg-slate-200 mx-auto max-w-6xl p-2 mt-2 shadow-sm shadow-slate-400'>
-          <div className='bg-sky-400 mb-2 p-2 antialiased'>
-            <h1>{id.split('-').join(' ')}</h1>
+          <div className='bg-sky-400 mb-2 p-2 antialiased flex flex-col sm:items-center sm:flex-row justify-between'>
+            <h1 className='text-sm md:text-base'>{id.split('-').join(' ')}</h1>
+            <div className='flex gap-3 text-xs mt-2 sm:mt-0 sm:pr-2 text-white'>
+              <button
+                onClick={previous}
+                className='p-2 bg-sky-500 hover:bg-sky-600 rounded'
+              >
+                Previous Eps.
+              </button>
+              <button
+                onClick={next}
+                className='p-2 bg-sky-500 hover:bg-sky-600 rounded'
+              >
+                Next Eps.
+              </button>
+            </div>
           </div>
           {loading && <LoadingVideoAnime />}
           {!loading && <Video {...play} />}
