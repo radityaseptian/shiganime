@@ -10,7 +10,6 @@ export default function Home() {
 
   useEffect(() => {
     initRecent()
-    document.title = 'Shiganime - Watch Anime Online'
   }, [])
   const initRecent = async () => {
     await fetch(url)

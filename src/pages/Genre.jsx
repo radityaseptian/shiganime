@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom'
 
 export default function Movie() {
   const [genre, setGenre] = useState([])
-
   const { id } = useParams()
   const url = `${import.meta.env.VITE_URL}/genre/${id}`
 
