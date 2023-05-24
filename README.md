@@ -27,7 +27,9 @@ Clone down this repository. You will need `node.js` and `git` installed globally
 
 2. Installation: `npm install`
 
-3. In the project directory, you can run: `npm start`
+3. In the project directory, you can run: `npm run dev`
+
+4. create `.env` file in root directory, then see example in `.env.example`
 
 Runs the app in the development mode.
 Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
