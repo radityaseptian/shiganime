@@ -1,16 +1,24 @@
 import { Link } from 'react-router-dom'
 import Navbar from '../layouts/Navbar'
 import Footer from '../layouts/Footer'
-import { useEffect } from 'react'
 import Rekomendasi from '../layouts/Rekomendasi'
 import { genres } from '../genres'
+import { Helmet } from 'react-helmet'
 
 export default function GenreList() {
-  useEffect(() => {
-    document.title = 'Genres List'
-  }, [])
   return (
     <>
+      <Helmet>
+        <meta charset='UTF-8' />
+        <meta name='description' content='Genre list anime' />
+        <meta
+          name='keywords'
+          content='anime, streaming, Shiganime, genre list,streaming anime subtitle english'
+        />
+        <meta name='author' content='Raditya Septian' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <title>Genre List</title>
+      </Helmet>
       <div className='bg-slate-100'>
         <Navbar />
         <div className='max-w-6xl lg:flex mx-auto'>

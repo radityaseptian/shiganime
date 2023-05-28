@@ -5,6 +5,7 @@ import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
 import Rekomendasi from '../layouts/Rekomendasi'
 import { LoadingAnimeDetail } from '../components/Loading'
+import { Helmet } from 'react-helmet'
 
 export default function Anime() {
   const [anime, setAnime] = useState({})
@@ -21,7 +22,6 @@ export default function Anime() {
   useEffect(() => {
     initAnime()
     RefeshToTop()
-    document.title = `Anime - ${id}`
   }, [id])
   const RefeshToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -29,6 +29,20 @@ export default function Anime() {
 
   return (
     <>
+      <Helmet>
+        <meta charset='UTF-8' />
+        <meta
+          name='description'
+          content='Watch anime online subtitle English'
+        />
+        <meta
+          name='keywords'
+          content='anime, streaming, Shiganime, streaming anime subtitle english'
+        />
+        <meta name='author' content='Raditya Septian' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <title>Anime - {id}</title>
+      </Helmet>
       <Navbar />
       <div className='container mx-auto max-w-6xl'>
         <div className='pt-2 text-xs sm:text-sm lg:text-md'>

@@ -4,6 +4,7 @@ import Content from '../layouts/Content'
 import Footer from '../layouts/Footer'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 export default function Search() {
   const [search, setSearch] = useState([])
@@ -17,11 +18,22 @@ export default function Search() {
   }
   useEffect(() => {
     initSearch()
-    document.title = `Search - ${param}`
+    // document.title = `Search - ${param}`
   }, [param])
 
   return (
     <>
+      <Helmet>
+        <meta charset='UTF-8' />
+        <meta name='description' content='Search anime' />
+        <meta
+          name='keywords'
+          content='search, anime, Shiganime, streaming anime subtitle english'
+        />
+        <meta name='author' content='Raditya Septian' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <title>Search - {param}</title>
+      </Helmet>
       <div className='bg-slate-100'>
         <Navbar />
         <div className='container mx-auto max-w-6xl'>

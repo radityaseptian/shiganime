@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import Video from '../components/Video'
 import { LoadingVideoAnime } from '../components/Loading'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 export default function AnimeWatch() {
   const navigate = useNavigate()
@@ -28,7 +29,6 @@ export default function AnimeWatch() {
   useEffect(() => {
     RefreshToTop()
     getAnimeWatch()
-    document.title = `Watch - ${id.split('-').join(' ')}`
   }, [id])
 
   const next = () => {
@@ -83,6 +83,17 @@ export default function AnimeWatch() {
   }
   return (
     <>
+      <Helmet>
+        <meta charset='UTF-8' />
+        <meta name='description' content='Watch anime subtitle English' />
+        <meta
+          name='keywords'
+          content='anime, streaming, Shiganime, streaming anime subtitle english'
+        />
+        <meta name='author' content='Raditya Septian' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <title>Watch - {id.split('-').join(' ')}</title>
+      </Helmet>
       <div className='bg-slate-100'>
         <Navbar />
         <div className='containerbg-slate-200 mx-auto max-w-6xl p-2 mt-2 shadow-sm shadow-slate-400'>
