@@ -18,14 +18,13 @@ export default function Search() {
   }
   useEffect(() => {
     initSearch()
-    // document.title = `Search - ${param}`
   }, [param])
 
   return (
     <>
       <Helmet>
         <meta charset='UTF-8' />
-        <meta name='description' content='Search anime' />
+        <meta name='description' content={`Search anime ${param} subtitle english - Shiganime`} />
         <meta
           name='keywords'
           content='search, anime, Shiganime, streaming anime subtitle english'

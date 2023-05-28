@@ -33,7 +33,7 @@ export default function Anime() {
         <meta charset='UTF-8' />
         <meta
           name='description'
-          content='Watch anime online subtitle English'
+          content={`Watch anime ${id.split('-').join(' ')} subtitle English - Shiganime`}
         />
         <meta
           name='keywords'

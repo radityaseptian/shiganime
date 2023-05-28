@@ -23,7 +23,7 @@ export default function Movie() {
     <>
       <Helmet>
         <meta charset='UTF-8' />
-        <meta name='description' content='specific genre anime' />
+        <meta name='description' content={`Watch Anime Genre ${id} Subtitle English - Shiganime`} />
         <meta
           name='keywords'
           content='anime, streaming, genre, Shiganime, streaming anime subtitle english'

@@ -10,7 +10,7 @@ export default function GenreList() {
     <>
       <Helmet>
         <meta charset='UTF-8' />
-        <meta name='description' content='Genre list anime' />
+        <meta name='description' content='Genre lists anime' />
         <meta
           name='keywords'
           content='anime, streaming, Shiganime, genre list,streaming anime subtitle english'

@@ -85,7 +85,7 @@ export default function AnimeWatch() {
     <>
       <Helmet>
         <meta charset='UTF-8' />
-        <meta name='description' content='Watch anime subtitle English' />
+        <meta name='description' content={`Watch anime ${id.split('-').join(' ')} subtitle English - Shiganime`} />
         <meta
           name='keywords'
           content='anime, streaming, Shiganime, streaming anime subtitle english'

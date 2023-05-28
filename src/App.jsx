@@ -6,7 +6,7 @@ import AnimeWatch from './pages/AnimeWatch'
 import Search from './pages/Search'
 import Genre from './pages/Genre.jsx'
 import Movie from './pages/Movie'
-import GenresList from './pages/GenresList'
+import GenreLists from './pages/GenreLists'
 import { useEffect, useState } from 'react'
 import { RekomendasiContext } from './context/RekomendasiContext'
 
@@ -31,7 +31,7 @@ export default function App() {
             <Route path='search/:param' element={<Search />} />
             <Route path='anime/:id' element={<Anime />} />
             <Route path='movie' element={<Movie />} />
-            <Route path='genres-list' element={<GenresList />} />
+            <Route path='genres-list' element={<GenreLists />} />
             <Route path='genre/:id' element={<Genre />} />
             <Route path='*' element={<Navigate to='/' />} />
           </Routes>
