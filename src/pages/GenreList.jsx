@@ -4,6 +4,8 @@ import Footer from '../layouts/Footer'
 import Rekomendasi from '../layouts/Rekomendasi'
 import { genres } from '../genres'
 import { Helmet } from 'react-helmet'
+import Container from '../components/Container'
+import TopAiring from '../layouts/TopAiring'
 
 export default function GenreList() {
   return (
@@ -19,14 +21,14 @@ export default function GenreList() {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <title>Genre List</title>
       </Helmet>
-      <div className='bg-slate-100'>
+      <div className='bg-zinc-700'>
         <Navbar />
-        <div className='max-w-6xl lg:flex mx-auto'>
-          <div>
-            <div className='bg-sky-500 mt-2'>
-              <h1 className='p-2 px-3'>Genre List</h1>
+        <Container>
+          <main className='max-w-[52rem] self-start'>
+            <div className='p-2 bg-sky-400'>
+              <h2 className='text-lg'>Genre List</h2>
             </div>
-            <ul className='flex flex-wrap shadow-md bg-slate-200 gap-2 p-2 [&>li]:py-2 text-xs md:text-sm xl:text-md'>
+            <ul className='flex flex-wrap shadow-md bg-zinc-800 gap-2 p-2 [&>li]:py-2 text-xs md:text-sm xl:text-md'>
               {genres.map((item) => {
                 return (
                   <>
@@ -42,14 +44,11 @@ export default function GenreList() {
                 )
               })}
             </ul>
-          </div>
-          <div className='lg:w-full p-2'>
-            <Rekomendasi />
-          </div>
-        </div>
-        <div className='mx-auto container max-w-6xl'>
-          <Footer />
-        </div>
+            <TopAiring />
+          </main>
+          <Rekomendasi />
+        </Container>
+        <Footer />
       </div>
     </>
   )

@@ -98,7 +98,7 @@ function NavBottom() {
         </li>
         <li className='flex-1 text-center overflow-hidden'>
           <Link
-            to='/genres-list'
+            to='/genre-list'
             className='py-2 block hover:bg-sky-600 hover:text-white'
           >
             Genre
@@ -131,7 +131,7 @@ function BackToTop() {
     <>
       <BiArrowToTop
         onClick={toTop}
-        className='scroll-smooth z-50 p-3 sm:p-4 fixed bottom-6 right-6 rounded-md cursor-pointer box-content bg-black/20 hover:bg-black/30'
+        className='scroll-smooth z-50 text-white p-3 sm:p-4 fixed bottom-6 right-6 rounded-md cursor-pointer box-content bg-black/20 hover:bg-black/30'
       />
     </>
   )

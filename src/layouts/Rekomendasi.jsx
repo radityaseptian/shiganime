@@ -2,7 +2,7 @@
 import { BsFillCalendarHeartFill } from 'react-icons/bs'
 import { useContext } from 'react'
 import { RekomendasiContext } from '../context/RekomendasiContext'
-import { LoadingRekomendasi } from '../components/Loading'
+import { Loading } from '../components/Loading'
 import { arrayLength } from '../arrayLength'
 import { Link } from 'react-router-dom'
 
@@ -10,23 +10,27 @@ export default function Rekomendasi({ className = 'lg:grid-cols-2' }) {
   const context = useContext(RekomendasiContext)
   return (
     <>
-      <div className='text-sm lg:text-md shadow-md'>
-        <div className='flex h-[2.3rem] text-white items-center shadow-md justify-between w-full rounded-t-md px-4 bg-sky-500 py-2'>
-          <h3>Recommendation</h3>
+      <div className='text-sm lg:text-md shadow-md lg:min-w-[19.1rem] self-start'>
+        <div className='flex h-[2.3rem] text-white items-center shadow-md justify-between rounded-t-md px-4 bg-sky-500 py-2'>
+          <h3>Recomendation</h3>
           <BsFillCalendarHeartFill />
         </div>
-        <div className='overflow-hidden p-2 bg-slate-200'>
+        <div className='overflow-hidden p-2 bg-zinc-800'>
           <ul
-            className={`${className} flex flex-wrap justify-evenly gap-1 lg:grid`}
+            className={`${className} flex flex-wrap justify-center gap-2 lg:grid`}
           >
             {context.loading ? (
               <>
-                {arrayLength(19).map((i) => {
-                  return <LoadingRekomendasi key={i} />
+                {arrayLength(20).map((i) => {
+                  return <Loading key={i} />
                 })}
               </>
             ) : (
               context.values.map((list) => {
+                const handleEmpty = list.animeTitle == ''
+                if (handleEmpty) {
+                  list.animeTitle = 'Oshi no Ko'
+                }
                 return (
                   <li
                     key={list.animeId}
@@ -36,9 +40,9 @@ export default function Rekomendasi({ className = 'lg:grid-cols-2' }) {
                       <img
                         src={list.animeImg}
                         alt={list.animeTitle}
-                        className='bg-cover bg-center w-full h-full'
+                        className='w-full h-full'
                       />
-                      <span className='text-xs text-white absolute right-0 bottom-0 left-0 sm:text-md lg:text-sm text-center bg-black/50 py-1'>
+                      <span className='text-xs px-1 text-white absolute line-clamp-2 right-0 bottom-0 left-0 sm:text-md lg:text-sm text-center bg-black/50 py-1'>
                         {list.animeTitle}
                       </span>
                     </Link>

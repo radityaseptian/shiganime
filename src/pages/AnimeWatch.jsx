@@ -85,7 +85,12 @@ export default function AnimeWatch() {
     <>
       <Helmet>
         <meta charset='UTF-8' />
-        <meta name='description' content={`Watch anime ${id.split('-').join(' ')} subtitle English - Shiganime`} />
+        <meta
+          name='description'
+          content={`Watch anime ${id
+            .split('-')
+            .join(' ')} subtitle English - Shiganime`}
+        />
         <meta
           name='keywords'
           content='anime, streaming, Shiganime, streaming anime subtitle english'
@@ -94,9 +99,9 @@ export default function AnimeWatch() {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <title>Watch - {id.split('-').join(' ')}</title>
       </Helmet>
-      <div className='bg-slate-100'>
+      <div className='bg-zinc-700'>
         <Navbar />
-        <div className='containerbg-slate-200 mx-auto max-w-6xl p-2 mt-2 shadow-sm shadow-slate-400'>
+        <div className='containerbg-slate-200 mx-auto max-w-5xl p-2 mt-2 shadow-sm shadow-slate-400'>
           <div className='bg-sky-400 mb-2 p-2 antialiased flex flex-col sm:items-center sm:flex-row justify-between'>
             <h1 className='text-sm md:text-base'>{id.split('-').join(' ')}</h1>
             <div className='flex gap-3 text-xs mt-2 sm:mt-0 sm:pr-2 text-white'>
@@ -120,7 +125,7 @@ export default function AnimeWatch() {
             <p className='bg-sky-500 py-2 pl-2 text-sm lg:text-md'>
               LIST EPISODE
             </p>
-            <ul className='overflow-y-auto max-h-screen text-xs sm:text-sm lg:text-md'>
+            <ul className='overflow-y-auto max-h-[70vh] text-xs sm:text-sm lg:text-md'>
               {!loading &&
                 listEpisodes.map((list, i) => {
                   return (

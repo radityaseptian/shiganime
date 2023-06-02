@@ -5,26 +5,49 @@ import Footer from '../layouts/Footer'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
+import Card from '../components/Card'
+import Container from '../components/Container'
+import Rekomendasi from '../layouts/Rekomendasi'
+import { Loading } from '../components/Loading'
+import { arrayLength } from '../arrayLength'
+import notFoundImg from '/404.webp'
 
 export default function Search() {
   const [search, setSearch] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [notFound, setNotFound] = useState(true)
   const { param } = useParams()
   const url = `${import.meta.env.VITE_URL}/search?keyw=${param}`
 
-  const initSearch = async () => {
-    await fetch(url)
+  const searchAnime = async (num = 1) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setLoading(true)
+    await fetch(`${url}&page=${num}`)
       .then((res) => res.json())
-      .then((res) => setSearch(res))
+      .then((res) => {
+        if (res.error) {
+          return setNotFound(true)
+        }
+        setSearch(res)
+      })
+      .finally(() => setLoading(false))
   }
   useEffect(() => {
-    initSearch()
+    searchAnime()
   }, [param])
+
+  const handleChangePagination = (empty, number) => {
+    searchAnime(number)
+  }
 
   return (
     <>
       <Helmet>
         <meta charset='UTF-8' />
-        <meta name='description' content={`Search anime ${param} subtitle english - Shiganime`} />
+        <meta
+          name='description'
+          content={`Search anime ${param} subtitle english - Shiganime`}
+        />
         <meta
           name='keywords'
           content='search, anime, Shiganime, streaming anime subtitle english'
@@ -33,12 +56,52 @@ export default function Search() {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <title>Search - {param}</title>
       </Helmet>
-      <div className='bg-slate-100'>
+      <div className='bg-zinc-700'>
         <Navbar />
-        <div className='container mx-auto max-w-6xl'>
-          <Content value={search} title={`Search: ${param}`} />
-          <Footer />
-        </div>
+        <Container>
+          {notFound ? (
+            <>
+              <img
+                src={notFoundImg}
+                className='self-start mb-2 lg:w-10/12'
+                alt='Not Found!'
+              />
+            </>
+          ) : (
+            <>
+              <Content
+                title={`Search: ${param}`}
+                pagination={20}
+                onChange={handleChangePagination}
+              >
+                {loading ? (
+                  <>
+                    {arrayLength(20).map((i) => {
+                      return <Loading key={i} className='h-36 sm:h-52' />
+                    })}
+                  </>
+                ) : (
+                  <>
+                    {search.map((item) => {
+                      return (
+                        <Card
+                          key={item.animeId}
+                          animeImg={item.animeImg}
+                          animeId={item.animeId}
+                          status={item.status}
+                        >
+                          {item.animeTitle}
+                        </Card>
+                      )
+                    })}
+                  </>
+                )}
+              </Content>
+            </>
+          )}
+          <Rekomendasi />
+        </Container>
+        <Footer />
       </div>
     </>
   )

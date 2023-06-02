@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.MuiPagination-root button {
+  color: #fff;
+  background-color: rgba(56, 195, 255, 0.521);
+  border-color: rgb(56, 189, 248);
+}
+.MuiPagination-root button:hover {
+  background-color: rgba(56, 191, 248, 0.884);
+}
+.muipagination-root button:target {
+  background-color: rgba(0, 0, 0, 0.492) !important;
+}
+.MuiPaginationItem-root {
+  color: #fff !important;
+}

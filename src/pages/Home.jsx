@@ -4,19 +4,33 @@ import Content from '../layouts/Content'
 import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
+import Container from '../components/Container'
+import Card from '../components/Card'
+import Rekomendasi from '../layouts/Rekomendasi'
+import { Loading } from '../components/Loading'
+import { arrayLength } from '../arrayLength'
 
 export default function Home() {
   const [recent, setRecent] = useState([])
+  const [loading, setLoading] = useState(true)
   const url = `${import.meta.env.VITE_URL}/recent-release`
 
   useEffect(() => {
     initRecent()
   }, [])
-  const initRecent = async () => {
-    await fetch(url)
+  const initRecent = async (num = 1) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setLoading(true)
+    await fetch(`${url}?page=${num}`)
       .then((res) => res.json())
       .then((res) => setRecent(res))
+      .finally(() => setLoading(false))
   }
+
+  const handleChangePagination = (empty, number) => {
+    initRecent(number)
+  }
+
   return (
     <>
       <Helmet>
@@ -30,18 +44,44 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <title>Shiganime - Watch Anime Subtitle English</title>
       </Helmet>
-      <div className='bg-slate-100'>
+      <div className='bg-zinc-700'>
         <Navbar />
-        <div className='container mx-auto max-w-6xl'>
+        <Container>
           <Content
-            value={recent}
-            pageCount={373}
-            url={url}
-            title={'Anime On-going'}
-            linkHome={true}
-          />
-          <Footer />
-        </div>
+            title='Anime On-Going'
+            pagination={312}
+            onChange={handleChangePagination}
+          >
+            {loading ? (
+              <>
+                {arrayLength(20).map((i) => {
+                  return <Loading className='h-36 sm:h-52' key={i} />
+                })}
+              </>
+            ) : (
+              <>
+                {recent.map((item) => {
+                  const oshiNoKo = item.animeTitle == ''
+                  if (oshiNoKo) {
+                    item.animeTitle = 'Oshi no Ko'
+                  }
+                  return (
+                    <Card
+                      key={item.animeId}
+                      animeId={item.animeId}
+                      animeImg={item.animeImg}
+                      episodeNum={item.episodeNum}
+                    >
+                      {item.animeTitle}
+                    </Card>
+                  )
+                })}
+              </>
+            )}
+          </Content>
+          <Rekomendasi />
+        </Container>
+        <Footer />
       </div>
     </>
   )
