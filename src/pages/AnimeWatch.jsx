@@ -101,9 +101,9 @@ export default function AnimeWatch() {
       </Helmet>
       <div className='bg-zinc-700'>
         <Navbar />
-        <div className='containerbg-slate-200 mx-auto max-w-5xl p-2 mt-2 shadow-sm shadow-slate-400'>
+        <div className='container bg-zinc-800 mx-auto max-w-5xl p-2 mt-2'>
           <div className='bg-sky-400 mb-2 p-2 antialiased flex flex-col sm:items-center sm:flex-row justify-between'>
-            <h1 className='text-sm md:text-base'>{id.split('-').join(' ')}</h1>
+            <h1 className='text-base'>{id.split('-').join(' ')}</h1>
             <div className='flex gap-3 text-xs mt-2 sm:mt-0 sm:pr-2 text-white'>
               <button
                 onClick={previous}

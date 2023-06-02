@@ -11,7 +11,7 @@ export default function Rekomendasi({ className = 'lg:grid-cols-2' }) {
   return (
     <>
       <div className='text-sm lg:text-md shadow-md lg:min-w-[19.1rem] self-start'>
-        <div className='flex h-[2.3rem] text-white items-center shadow-md justify-between rounded-t-md px-4 bg-sky-500 py-2'>
+        <div className='flex h-[2.73rem] text-white items-center shadow-md justify-between rounded-t-md px-4 bg-sky-500 py-2'>
           <h3>Recomendation</h3>
           <BsFillCalendarHeartFill />
         </div>

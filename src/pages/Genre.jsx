@@ -28,7 +28,7 @@ export default function Movie() {
     await fetch(`${url}?page=${num}`)
       .then((res) => res.json())
       .then((res) => {
-        if (res.error) {
+        if (res.error || res.length == 0) {
           return setNotFound(true)
         }
         setGenre(res)
@@ -36,7 +36,7 @@ export default function Movie() {
       .finally(() => setLoading(false))
   }
 
-  const handleChangePagination = (empty, number) => {
+  const handleChangePagination = (_, number) => {
     initGenre(number)
   }
 
@@ -77,7 +77,7 @@ export default function Movie() {
                 {loading ? (
                   <>
                     {arrayLength(20).map((i) => {
-                      return <Loading key={i} className='h-36 sm:h-52' />
+                      return <Loading key={i} className='min-h-[9rem] sm:h-52 md:h-48 lg:h-52' />
                     })}
                   </>
                 ) : (

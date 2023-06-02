@@ -15,7 +15,7 @@ import notFoundImg from '/404.webp'
 export default function Search() {
   const [search, setSearch] = useState([])
   const [loading, setLoading] = useState(true)
-  const [notFound, setNotFound] = useState(true)
+  const [notFound, setNotFound] = useState(false)
   const { param } = useParams()
   const url = `${import.meta.env.VITE_URL}/search?keyw=${param}`
 
@@ -25,7 +25,7 @@ export default function Search() {
     await fetch(`${url}&page=${num}`)
       .then((res) => res.json())
       .then((res) => {
-        if (res.error) {
+        if (res.error || res.length == 0) {
           return setNotFound(true)
         }
         setSearch(res)
@@ -36,7 +36,7 @@ export default function Search() {
     searchAnime()
   }, [param])
 
-  const handleChangePagination = (empty, number) => {
+  const handleChangePagination = (_, number) => {
     searchAnime(number)
   }
 
@@ -77,7 +77,7 @@ export default function Search() {
                 {loading ? (
                   <>
                     {arrayLength(20).map((i) => {
-                      return <Loading key={i} className='h-36 sm:h-52' />
+                      return <Loading key={i} className='min-h-[9rem] sm:h-52 md:h-48 lg:h-52' />
                     })}
                   </>
                 ) : (

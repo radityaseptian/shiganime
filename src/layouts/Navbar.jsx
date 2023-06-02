@@ -34,14 +34,14 @@ export default function Navbar() {
               <span className='h-1 w-7 rounded bg-white'></span>
               <span className='h-1 w-7 rounded bg-white'></span>
             </div>
-            <div className='self-end relative mx-2 flex-1 overflow-hidden rounded'>
+            <div className='md:self-end relative mx-2 flex-1 overflow-hidden rounded'>
               <input
                 value={value}
                 onKeyDown={search}
                 onChange={(e) => setValue(e.target.value)}
                 type='text'
                 placeholder='Search anime...'
-                className='text-xs sm:text-sm w-full h-8 focus:outline-none focus:rounded focus:border-[1px] border-slate-500 pl-2 pr-10'
+                className='text-sm w-full h-8 focus:outline-none pl-2 pr-10'
               />
               <FiSearch
                 onClick={search}

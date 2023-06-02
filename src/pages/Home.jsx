@@ -27,7 +27,7 @@ export default function Home() {
       .finally(() => setLoading(false))
   }
 
-  const handleChangePagination = (empty, number) => {
+  const handleChangePagination = (_, number) => {
     initRecent(number)
   }
 
@@ -55,7 +55,7 @@ export default function Home() {
             {loading ? (
               <>
                 {arrayLength(20).map((i) => {
-                  return <Loading className='h-36 sm:h-52' key={i} />
+                  return <Loading className='min-h-[9rem] sm:h-52 md:h-48 lg:h-52' key={i} />
                 })}
               </>
             ) : (

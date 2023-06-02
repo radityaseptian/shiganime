@@ -79,6 +79,8 @@ export default function TopAiring() {
       <div className='mt-4 flex justify-center'>
         <Pagination
           count={50}
+          hideNextButton
+          hidePrevButton
           variant='outlined'
           shape='rounded'
           onChange={handleChangePagination}

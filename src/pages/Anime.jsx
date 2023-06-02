@@ -49,7 +49,7 @@ export default function Anime() {
         <title>{title}</title>
       </Helmet>
       <Navbar />
-      <div className='pt-2 text-xs sm:text-sm lg:text-md text-white bg-zinc-700'>
+      <div className='pt-2 text-sm lg:text-md text-white bg-zinc-700'>
         <div className='bg-zinc-800 mx-auto max-w-5xl p-2'>
           <div className='bg-sky-400 py-2 text-center text-black'>
             <h1>Streaming {anime.animeTitle}</h1>
@@ -70,40 +70,52 @@ export default function Anime() {
               <p>{anime.synopsis}</p>
             </div>
           </div>
-          <div className='flex py-2 leading-5'>
-            <div className='pr-5'>
-              <p>Title</p>
-              <p>Alternatif</p>
-              <p>Type</p>
-              <p>Status</p>
-              <p>Episode Available</p>
-              <p>Release Date</p>
-              <p>Genres</p>
-            </div>
-            <div>
-              <p>: {anime.animeTitle}</p>
-              <p>: {anime.otherNames}</p>
-              <p>: {anime.type}</p>
-              <p>: {anime.status}</p>
-              <p>: {anime.totalEpisodes}</p>
-              <p>: {anime.releasedDate}</p>
-              <ul className='flex gap-1'>
-                :
-                {anime.genres &&
-                  anime.genres.map((list) => {
-                    return (
-                      <>
-                        <Link to={`/genre/${list}`}>
-                          <li key={list} className='pr-1'>
-                            {list}
-                          </li>
-                        </Link>
-                      </>
-                    )
-                  })}
-              </ul>
-            </div>
-          </div>
+          <table cellPadding={4} className='mt-2'>
+            <tr>
+              <td>Title</td>
+              <td className='line-clamp-2'>: {anime.animeTitle}</td>
+            </tr>
+            <tr>
+              <td>Alternatif</td>
+              <td className='line-clamp-2'>: {anime.otherNames}</td>
+            </tr>
+            <tr>
+              <td>Type</td>
+              <td>: {anime.type}</td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td>: {anime.status}</td>
+            </tr>
+            <tr>
+              <td>Episode Available</td>
+              <td>: {anime.totalEpisodes}</td>
+            </tr>
+            <tr>
+              <td>Release Date</td>
+              <td>: {anime.releasedDate}</td>
+            </tr>
+            <tr>
+              <td>Genres</td>
+              <td>
+                <ul className='flex gap-1'>
+                  :
+                  {anime.genres &&
+                    anime.genres.map((list) => {
+                      return (
+                        <>
+                          <Link to={`/genre/${list}`}>
+                            <li key={list} className='pr-1'>
+                              {list}
+                            </li>
+                          </Link>
+                        </>
+                      )
+                    })}
+                </ul>
+              </td>
+            </tr>
+          </table>
           <div className='mb-4 text-black pt-4'>
             <p className='bg-sky-500 py-2 pl-2'>LIST EPISODE</p>
             <ul className='overflow-y-auto max-h-[70vh]'>
