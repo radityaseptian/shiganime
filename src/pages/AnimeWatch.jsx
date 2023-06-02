@@ -125,7 +125,7 @@ export default function AnimeWatch() {
             <p className='bg-sky-500 py-2 pl-2 text-sm lg:text-md'>
               LIST EPISODE
             </p>
-            <ul className='overflow-y-auto max-h-[70vh] text-xs sm:text-sm lg:text-md'>
+            <ul className='overflow-y-auto max-h-[70vh] text-sm lg:text-md'>
               {!loading &&
                 listEpisodes.map((list, i) => {
                   return (

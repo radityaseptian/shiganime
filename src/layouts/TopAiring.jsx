@@ -38,7 +38,7 @@ export default function TopAiring() {
               return (
                 <>
                   <div key={i} className='bg-zinc-700 rounded flex gap-1 pr-2'>
-                    <SkeletonTheme baseColor='#373438' highlightColor='#c4c2c4'>
+                    <SkeletonTheme baseColor='#373438' highlightColor='#393a3b'>
                       <Skeleton height={136} width={98} className='m-2' />
                       <Skeleton
                         count={3}
