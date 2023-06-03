@@ -98,7 +98,7 @@ export default function Anime() {
             <tr>
               <td>Genres</td>
               <td>
-                <ul className='flex gap-1'>
+                <ul className='flex gap-1 flex-wrap'>
                   :
                   {anime.genres &&
                     anime.genres.map((list) => {
