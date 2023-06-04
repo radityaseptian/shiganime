@@ -28,7 +28,7 @@ export default function GenreList() {
             <div className='p-2 bg-sky-400'>
               <h2 className='text-lg'>Genre List</h2>
             </div>
-            <ul className='flex flex-wrap shadow-md bg-zinc-800 gap-2 p-2 [&>li]:py-2 text-xs md:text-sm xl:text-md'>
+            <ul className='flex flex-wrap shadow-md bg-zinc-800 gap-2 p-2 [&>li]:py-2 text-base xl:text-md'>
               {genres.map((item) => {
                 return (
                   <>
