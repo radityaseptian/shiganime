@@ -69,7 +69,7 @@ function NavSlider() {
         </li>
         <li>
           <Link
-            to='/genres-list'
+            to='/genre-list'
             className='pr-[100%] box-content p-2 hover:bg-sky-400'
           >
             Genre
