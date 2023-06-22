@@ -2,7 +2,7 @@
 import CardTopAiring from '../components/CardTopAiring'
 import { Pagination } from '@mui/material'
 import { useState, useEffect } from 'react'
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { arrayLength } from '../arrayLength.js'
 
@@ -38,15 +38,13 @@ export default function TopAiring() {
               return (
                 <>
                   <div key={i} className='bg-zinc-700 rounded flex gap-1 pr-2'>
-                    <SkeletonTheme baseColor='#373438' highlightColor='#393a3b'>
-                      <Skeleton height={136} width={98} className='m-2' />
-                      <Skeleton
-                        count={3}
-                        height={20}
-                        containerClassName='flex-1'
-                        className='mt-4'
-                      />
-                    </SkeletonTheme>
+                    <Skeleton height={136} width={98} className='m-2' />
+                    <Skeleton
+                      count={3}
+                      height={20}
+                      containerClassName='flex-1'
+                      className='mt-4'
+                    />
                   </div>
                 </>
               )

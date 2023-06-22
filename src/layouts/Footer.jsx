@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <>
       <Container>
-        <footer className='border-t-[1px] text-slate-300 border-white px-2 lg:px-8 py-10 md:py-14 mt-10 md:mt-14'>
+        <footer className='border-t-[1px] text-slate-300 border-slate-400 px-2 lg:px-8 py-10 md:py-14 mt-10 md:mt-14'>
           <div className='grid sm:grid-cols-2  md:grid-cols-3 lg:gap-10'>
             <div>
               <div className='pb-2 font-patua text-white text-lg'>
@@ -52,7 +52,7 @@ export default function Footer() {
               </p>
               <div className='flex gap-2 lg:gap-3'>
                 <a
-                  href='https://www.facebook.com/'
+                  href='https://www.facebook.com/profile.php?id=100093066214468'
                   target='_blank'
                   rel='noreferrer'
                   className='p-2 hover:bg-black/50 rounded-full'

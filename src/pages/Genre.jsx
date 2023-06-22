@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet'
 import Card from '../components/Card'
 import Container from '../components/Container'
 import Rekomendasi from '../layouts/Rekomendasi'
-import { Loading } from '../components/Loading'
+import Skeleton from 'react-loading-skeleton'
 import { arrayLength } from '../arrayLength'
 import notFoundImg from '/404.webp'
 
@@ -77,7 +77,9 @@ export default function Movie() {
                 {loading ? (
                   <>
                     {arrayLength(20).map((i) => {
-                      return <Loading key={i} className='min-h-[9rem] sm:h-52 md:h-48 lg:h-52' />
+                      return (
+                        <Skeleton key={i} className='h-40 sm:h-56 md:h-52' />
+                      )
                     })}
                   </>
                 ) : (

@@ -4,7 +4,7 @@ import Navbar from '../layouts/Navbar'
 import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
 import Video from '../components/Video'
-import { LoadingVideoAnime } from '../components/Loading'
+import Skeleton from 'react-loading-skeleton'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 
@@ -103,7 +103,7 @@ export default function AnimeWatch() {
         <Navbar />
         <div className='container bg-zinc-800 mx-auto max-w-5xl p-2 mt-2'>
           <div className='bg-sky-400 mb-2 p-2 antialiased flex flex-col sm:items-center sm:flex-row justify-between'>
-            <h1 className='text-base'>{id.split('-').join(' ')}</h1>
+            <h1 className='text-base capitalize'>{id.split('-').join(' ')}</h1>
             <div className='flex gap-3 text-xs mt-2 sm:mt-0 sm:pr-2 text-white'>
               <button
                 onClick={previous}
@@ -119,28 +119,34 @@ export default function AnimeWatch() {
               </button>
             </div>
           </div>
-          {loading && <LoadingVideoAnime />}
-          {!loading && <Video {...play} />}
+          {loading ? (
+            <Skeleton className='h-52 sm:h-80 md:h-96 lg:h-[33rem]' />
+          ) : (
+            <Video {...play} />
+          )}
           <div className='mt-3'>
             <p className='bg-sky-500 py-2 pl-2 text-sm lg:text-md'>
               LIST EPISODE
             </p>
             <ul className='overflow-y-auto max-h-[70vh] text-sm lg:text-md'>
-              {!loading &&
-                listEpisodes.map((list, i) => {
-                  return (
-                    <>
-                      <li key={i} className='pt-1'>
-                        <Link
-                          to={`/anime/watch/${list.episodeId}`}
-                          className='py-1 pl-2 block bg-sky-300 hover:bg-sky-400 hover:underline'
-                        >
-                          Episode {list.episodeNum}
-                        </Link>
-                      </li>
-                    </>
-                  )
-                })}
+              {loading ? <Skeleton count={5} height={25} /> : (
+                <>
+                  {listEpisodes.map((list, i) => {
+                    return (
+                      <>
+                        <li key={i} className='pt-1'>
+                          <Link
+                            to={`/anime/watch/${list.episodeId}`}
+                            className='py-1 pl-2 block bg-sky-300 hover:bg-sky-400 hover:underline'
+                          >
+                            Episode {list.episodeNum}
+                          </Link>
+                        </li>
+                      </>
+                    )
+                  })}
+                </>
+              )}
             </ul>
           </div>
         </div>

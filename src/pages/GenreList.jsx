@@ -2,10 +2,59 @@ import { Link } from 'react-router-dom'
 import Navbar from '../layouts/Navbar'
 import Footer from '../layouts/Footer'
 import Rekomendasi from '../layouts/Rekomendasi'
-import { genres } from '../genres'
 import { Helmet } from 'react-helmet'
 import Container from '../components/Container'
 import TopAiring from '../layouts/TopAiring'
+
+const genres = [
+  'action',
+  'adventure',
+  'cars',
+  'comedy',
+  'crime',
+  'dementia',
+  'demons',
+  'drama',
+  'dub',
+  'ecchi',
+  'family',
+  'fantasy',
+  'game',
+  'gourmet',
+  'harem',
+  'historical',
+  'horror',
+  'josei',
+  'kids',
+  'magic',
+  'martial-arts',
+  'mecha',
+  'military',
+  'Mmusic',
+  'mystery',
+  'parody',
+  'police',
+  'psychological',
+  'romance',
+  'samurai',
+  'school',
+  'sci-fi',
+  'seinen',
+  'shoujo',
+  'shoujo-ai',
+  'shounen',
+  'shounen-ai',
+  'slice-of-Life',
+  'space',
+  'sports',
+  'super-power',
+  'supernatural',
+  'suspense',
+  'thriller',
+  'vampire',
+  'yaoi',
+  'yuri',
+]
 
 export default function GenreList() {
   return (

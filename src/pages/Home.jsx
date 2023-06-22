@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Navbar from '../layouts/Navbar'
+import Skeleton from 'react-loading-skeleton'
 import Content from '../layouts/Content'
 import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
@@ -7,7 +8,6 @@ import { Helmet } from 'react-helmet'
 import Container from '../components/Container'
 import Card from '../components/Card'
 import Rekomendasi from '../layouts/Rekomendasi'
-import { Loading } from '../components/Loading'
 import { arrayLength } from '../arrayLength'
 
 export default function Home() {
@@ -26,7 +26,6 @@ export default function Home() {
       .then((res) => setRecent(res))
       .finally(() => setLoading(false))
   }
-
   const handleChangePagination = (_, number) => {
     initRecent(number)
   }
@@ -55,7 +54,7 @@ export default function Home() {
             {loading ? (
               <>
                 {arrayLength(20).map((i) => {
-                  return <Loading className='min-h-[9rem] sm:h-52 md:h-48 lg:h-52' key={i} />
+                  return <Skeleton key={i} className='h-40 sm:h-56 md:h-52' />
                 })}
               </>
             ) : (

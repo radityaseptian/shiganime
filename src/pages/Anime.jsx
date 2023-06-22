@@ -4,7 +4,7 @@ import Navbar from '../layouts/Navbar'
 import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
 import Rekomendasi from '../layouts/Rekomendasi'
-import { LoadingAnimeDetail } from '../components/Loading'
+import Skeleton from 'react-loading-skeleton'
 import { Helmet } from 'react-helmet'
 
 export default function Anime() {
@@ -56,19 +56,30 @@ export default function Anime() {
           </div>
           <div className='flex justify-between pt-2'>
             {loading ? (
-              <LoadingAnimeDetail />
+              <>
+                <div className='flex-1 flex gap-2'>
+                  <Skeleton className='w-32 h-48 md:w-36 md:h-52 lg:w-40 lg:h-60' />
+                  <Skeleton
+                    count={9}
+                    containerClassName='flex-1 lg:space-y-[.10rem]'
+                    height={18}
+                  />
+                </div>
+              </>
             ) : (
-              <div className='w-32 h-48 md:w-36 md:h-52 lg:w-40 lg:h-60'>
-                <img
-                  src={anime.animeImg}
-                  alt={anime.animeTitle}
-                  className='bg-cover bg-center w-full h-full'
-                />
-              </div>
+              <>
+                <div className='w-32 h-48 md:w-36 md:h-52 lg:w-40 lg:h-60'>
+                  <img
+                    src={anime.animeImg}
+                    alt={anime.animeTitle}
+                    className='bg-cover bg-center w-full h-full'
+                  />
+                </div>
+                <div className='flex-1 overflow-y-auto h-48 md:h-52 lg:h-60 px-2'>
+                  <p>{anime.synopsis}</p>
+                </div>
+              </>
             )}
-            <div className='flex-1 overflow-y-auto h-48 md:h-52 lg:h-60 px-2'>
-              <p>{anime.synopsis}</p>
-            </div>
           </div>
           <table cellPadding={4} className='mt-2'>
             <tr>
@@ -119,24 +130,29 @@ export default function Anime() {
           <div className='mb-4 text-black pt-4'>
             <p className='bg-sky-500 py-2 pl-2'>LIST EPISODE</p>
             <ul className='overflow-y-auto max-h-[70vh]'>
-              {anime.episodesList &&
-                anime.episodesList.map((list) => {
-                  return (
-                    <>
-                      <li key={list.episodeNum} className='pt-1'>
-                        <Link
-                          to={`/anime/watch/${list.episodeId}`}
-                          className='py-1 pl-2 block bg-sky-300 hover:bg-sky-400 hover:underline'
-                        >
-                          Episode {list.episodeNum}
-                        </Link>
-                      </li>
-                    </>
-                  )
-                })}
+              {loading ? <Skeleton count={5} height={25} />
+               : (
+                <>
+                  {anime.episodesList &&
+                    anime.episodesList.map((list) => {
+                      return (
+                        <>
+                          <li key={list.episodeNum} className='pt-1'>
+                            <Link
+                              to={`/anime/watch/${list.episodeId}`}
+                              className='py-1 pl-2 block bg-sky-300 hover:bg-sky-400 hover:underline'
+                            >
+                              Episode {list.episodeNum}
+                            </Link>
+                          </li>
+                        </>
+                      )
+                    })}
+                </>
+              )}
             </ul>
           </div>
-          <Rekomendasi className={'grid-cols-7'} />
+          <Rekomendasi className='lg:grid-cols-6' lgFull={true} />
         </div>
         <Footer />
       </div>
