@@ -65,7 +65,7 @@ function NavSlider() {
     <div className='text-sm p-2 md:hidden bg-sky-500 text-white [&>ul>li]:py-2'>
       <ul className='overflow-hidden'>
         <li>
-          <Link to='/' className='pr-[100%] box-content p-2 hover:bg-sky-400'>
+          <Link to='/' className='pr-[100%] box-content p-2 rounded hover:bg-sky-400'>
             Home
           </Link>
         </li>

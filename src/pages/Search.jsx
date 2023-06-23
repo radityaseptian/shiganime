@@ -19,6 +19,7 @@ export default function Search() {
   const url = `${import.meta.env.VITE_URL}/search?keyw=${param}`
 
   const searchAnime = async (num = 1) => {
+    setNotFound(false)
     window.scrollTo({ top: 0, behavior: 'smooth' })
     setLoading(true)
     await fetch(`${url}&page=${num}`)
