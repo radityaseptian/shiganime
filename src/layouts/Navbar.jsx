@@ -18,40 +18,42 @@ export default function Navbar() {
   }
   return (
     <>
-      <nav className='bg-sky-400 md:px-2'>
-        <div className='w-full h-24 box-border antialiased flex md:flex-row flex-col justify-between md:pl-2 py-1'>
-          <div className='grid px-20 pb-1 place-content-center flex-1 md:flex-none'>
-            <Link to='/'>
-              <h1 className='text-5xl font-dancing'>Shiganime.</h1>
-            </Link>
-          </div>
-          <div className='flex md:flex-1 justify-between items-center '>
-            <div
-              onClick={() => setSlider(!slider)}
-              className='flex flex-col md:hidden bg-sky-500 p-2 rounded gap-1 cursor-pointer mx-4'
-            >
-              <span className='h-1 w-7 rounded bg-white'></span>
-              <span className='h-1 w-7 rounded bg-white'></span>
-              <span className='h-1 w-7 rounded bg-white'></span>
+      <nav className='bg-sky-400'>
+        <div className='max-w-6xl mx-auto'>
+          <div className='h-24 box-border antialiased flex md:flex-row flex-col justify-between py-1'>
+            <div className='grid px-20 pb-1 place-content-center flex-1 md:flex-none'>
+              <Link to='/'>
+                <h1 className='text-5xl font-dancing'>Shiganime.</h1>
+              </Link>
             </div>
-            <div className='md:self-end relative mx-2 flex-1 overflow-hidden rounded'>
-              <input
-                value={value}
-                onKeyDown={search}
-                onChange={(e) => setValue(e.target.value)}
-                type='text'
-                placeholder='Search anime...'
-                className='text-sm w-full h-8 focus:outline-none pl-2 pr-10'
-              />
-              <FiSearch
-                onClick={search}
-                className='absolute right-0 top-0 box-content p-2 cursor-pointer'
-              />
+            <div className='flex md:flex-1 justify-between items-center '>
+              <div
+                onClick={() => setSlider(!slider)}
+                className='flex flex-col md:hidden bg-sky-500 p-2 rounded gap-1 cursor-pointer mx-4'
+              >
+                <span className='h-1 w-7 rounded bg-white'></span>
+                <span className='h-1 w-7 rounded bg-white'></span>
+                <span className='h-1 w-7 rounded bg-white'></span>
+              </div>
+              <div className='md:self-end relative mx-2 flex-1 overflow-hidden rounded'>
+                <input
+                  value={value}
+                  onKeyDown={search}
+                  onChange={(e) => setValue(e.target.value)}
+                  type='text'
+                  placeholder='Search anime...'
+                  className='text-sm w-full h-8 focus:outline-none pl-2 pr-10'
+                />
+                <FiSearch
+                  onClick={search}
+                  className='absolute right-0 top-0 box-content p-2 cursor-pointer'
+                />
+              </div>
             </div>
           </div>
+          {slider && <NavSlider />}
+          <NavBottom />
         </div>
-        {slider && <NavSlider />}
-        <NavBottom />
       </nav>
       <BackToTop />
     </>

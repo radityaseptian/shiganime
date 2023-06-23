@@ -17,7 +17,7 @@ export default function Rekomendasi(props) {
         } text-sm lg:text-md lg:min-w-[19.1rem] self-start`}
       >
         <div className='flex h-[2.73rem] text-white items-center justify-between rounded-t-md px-4 bg-sky-500 py-2'>
-          <h3 className='text-base'>Recomendation</h3>
+          <h3 className='text-base'>Recommendation</h3>
           <BsFillCalendarHeartFill />
         </div>
         <div className='p-2 bg-zinc-800'>
