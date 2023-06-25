@@ -13,7 +13,7 @@ import { arrayLength } from '../arrayLength'
 export default function Home() {
   const [recent, setRecent] = useState([])
   const [loading, setLoading] = useState(true)
-  const url = `${import.meta.env.VITE_URL}/recent-release?type=1&`
+  const url = `${import.meta.env.VITE_URL}/recent-release?type=2&`
 
   useEffect(() => {
     initRecent()
@@ -41,14 +41,14 @@ export default function Home() {
         />
         <meta name='author' content='Raditya Septian' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-        <title>Shiganime - Watch Anime Subtitle English</title>
+        <title>Shiganime - Watch Anime Dubbing English</title>
       </Helmet>
       <div className='bg-zinc-700'>
         <Navbar />
         <Container>
           <Content
-            title='Anime On-Going'
-            pagination={375}
+            title='Anime On-Going Dubbing'
+            pagination={164}
             onChange={handleChangePagination}
           >
             {loading ? (

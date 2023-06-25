@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom'
 import Home from './pages/Home'
+import Dubbing from './pages/Dubbing'
+import Chinese from './pages/Chinese'
 import Anime from './pages/Anime'
 import AnimeWatch from './pages/AnimeWatch'
 import Search from './pages/Search'
@@ -33,6 +35,8 @@ export default function App() {
               <Route path='search/:param' element={<Search />} />
               <Route path='anime/:id' element={<Anime />} />
               <Route path='movie' element={<Movie />} />
+              <Route path='dubbing' element={<Dubbing />} />
+              <Route path='chinese' element={<Chinese />} />
               <Route path='genre-list' element={<GenreList />} />
               <Route path='genre/:id' element={<Genre />} />
               <Route path='*' element={<Navigate to='/' />} />

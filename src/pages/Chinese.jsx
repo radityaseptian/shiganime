@@ -13,7 +13,7 @@ import { arrayLength } from '../arrayLength'
 export default function Home() {
   const [recent, setRecent] = useState([])
   const [loading, setLoading] = useState(true)
-  const url = `${import.meta.env.VITE_URL}/recent-release?type=1&`
+  const url = `${import.meta.env.VITE_URL}/recent-release?type=3&`
 
   useEffect(() => {
     initRecent()
@@ -37,18 +37,18 @@ export default function Home() {
         <meta name='description' content='Watch anime subtitle English' />
         <meta
           name='keywords'
-          content='anime, streaming, Shiganime, streaming anime subtitle english, dubbing english'
+          content='anime, streaming, Shiganime, streaming anime subtitle english, dubbing english, anime chinese'
         />
         <meta name='author' content='Raditya Septian' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-        <title>Shiganime - Watch Anime Subtitle English</title>
+        <title>Shiganime - Watch Anime Chinese Subtitle English</title>
       </Helmet>
       <div className='bg-zinc-700'>
         <Navbar />
         <Container>
           <Content
-            title='Anime On-Going'
-            pagination={375}
+            title='Anime On-Going Chinese'
+            pagination={49}
             onChange={handleChangePagination}
           >
             {loading ? (
@@ -60,10 +60,6 @@ export default function Home() {
             ) : (
               <>
                 {recent.map((item) => {
-                  const oshiNoKo = item.animeTitle == ''
-                  if (oshiNoKo) {
-                    item.animeTitle = 'Oshi no Ko'
-                  }
                   return (
                     <Card
                       key={item.animeId}

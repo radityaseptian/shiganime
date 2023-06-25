@@ -51,8 +51,8 @@ export default function Anime() {
       <Navbar />
       <div className='pt-2 text-sm lg:text-md text-white bg-zinc-700'>
         <div className='bg-zinc-800 mx-auto max-w-5xl p-2'>
-          <div className='bg-sky-400 py-2 text-center text-black'>
-            <h1>Streaming {anime.animeTitle}</h1>
+          <div className='grid place-content-center bg-sky-400 p-2 text-center text-base text-black min-h-[2.73rem]'>
+            <h1>{anime.animeTitle}</h1>
           </div>
           <div className='flex justify-between pt-2'>
             {loading ? (
@@ -60,7 +60,7 @@ export default function Anime() {
                 <div className='flex-1 flex gap-2'>
                   <Skeleton className='w-32 h-48 md:w-36 md:h-52 lg:w-40 lg:h-60' />
                   <Skeleton
-                    count={9}
+                    count={6}
                     containerClassName='flex-1 lg:space-y-[.10rem]'
                     height={18}
                   />
@@ -130,8 +130,9 @@ export default function Anime() {
           <div className='mb-4 text-black pt-4'>
             <p className='bg-sky-500 py-2 pl-2'>LIST EPISODE</p>
             <ul className='overflow-y-auto max-h-[70vh]'>
-              {loading ? <Skeleton count={5} height={25} />
-               : (
+              {loading ? (
+                <Skeleton count={5} height={25} />
+              ) : (
                 <>
                   {anime.episodesList &&
                     anime.episodesList.map((list) => {

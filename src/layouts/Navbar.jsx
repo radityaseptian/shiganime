@@ -3,9 +3,33 @@ import { FiSearch } from 'react-icons/fi'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
+const navbar = [
+  {
+    name: 'Home',
+    path: '/',
+  },
+  {
+    name: 'Genre',
+    path: '/genre-list',
+  },
+  {
+    name: 'Movie',
+    path: '/movie',
+  },
+  {
+    name: 'Dubbing',
+    path: '/dubbing',
+  },
+  {
+    name: 'Chinese',
+    path: '/chinese',
+  },
+]
+
 export default function Navbar() {
   const [slider, setSlider] = useState(false)
   const [value, setValue] = useState('')
+  const [target, setTarget] = useState('')
   const navigate = useNavigate()
 
   const search = (e) => {
@@ -16,6 +40,15 @@ export default function Navbar() {
       }
     }
   }
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setTarget('/home')
+    } else {
+      setTarget(location.pathname)
+    }
+  }, [])
+
   return (
     <>
       <nav className='bg-sky-400'>
@@ -51,71 +84,48 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          {slider && <NavSlider />}
-          <NavBottom />
+          {slider && (
+            <>
+              <ul className='overflow-hidden text-sm p-2 md:hidden bg-sky-500 text-white space-y-2'>
+                {navbar.map(({ name, path }) => {
+                  let newPathTarget = path === '/' ? '/home' : path
+                  return (
+                    <li key={name}>
+                      <Link
+                        to={path}
+                        className={`${
+                          target === newPathTarget && 'bg-sky-400'
+                        } block p-2 hover:bg-sky-400`}
+                      >
+                        {name}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </>
+          )}
+          <ul className='hidden md:flex justify-between p-2 gap-2'>
+            {navbar.map(({ name, path }) => {
+              let newPathTarget = path === '/' ? '/home' : path
+              return (
+                <li
+                  key={name}
+                  className={`${
+                    target === newPathTarget && 'bg-sky-600 text-white'
+                  } flex-1 text-center overflow-hidden bg-sky-500 hover:bg-sky-600 hover:text-white`}
+                >
+                  <Link to={path} className='py-2 block'>
+                    {name}
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
         </div>
       </nav>
       <BackToTop />
     </>
-  )
-}
-
-function NavSlider() {
-  return (
-    <div className='text-sm p-2 md:hidden bg-sky-500 text-white [&>ul>li]:py-2'>
-      <ul className='overflow-hidden'>
-        <li>
-          <Link to='/' className='pr-[100%] box-content p-2 rounded hover:bg-sky-400'>
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link
-            to='/genre-list'
-            className='pr-[100%] box-content p-2 hover:bg-sky-400'
-          >
-            Genre
-          </Link>
-        </li>
-        <li>
-          <Link
-            to='/movie'
-            className='pr-[100%] box-content p-2 hover:bg-sky-400'
-          >
-            Movie
-          </Link>
-        </li>
-      </ul>
-    </div>
-  )
-}
-function NavBottom() {
-  return (
-    <div className='hidden md:block'>
-      <ul className='flex justify-between px-2 pb-2 pt-1 gap-2 [&>li]:bg-sky-500'>
-        <li className='flex-1 text-center overflow-hidden'>
-          <Link to='/' className='py-2 block hover:bg-sky-600 hover:text-white'>
-            Home
-          </Link>
-        </li>
-        <li className='flex-1 text-center overflow-hidden'>
-          <Link
-            to='/genre-list'
-            className='py-2 block hover:bg-sky-600 hover:text-white'
-          >
-            Genre
-          </Link>
-        </li>
-        <li className='flex-1 text-center overflow-hidden'>
-          <Link
-            to='/movie'
-            className='py-2 block hover:bg-sky-600 hover:text-white'
-          >
-            Movie
-          </Link>
-        </li>
-      </ul>
-    </div>
   )
 }
 
