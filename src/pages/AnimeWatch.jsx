@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 import { arrayLength } from '../arrayLength'
@@ -32,44 +32,28 @@ export default function AnimeWatch() {
   const { id } = useParams()
   const url = import.meta.env.VITE_URL
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-    getAnimeWatch(`${url}/vidcdn/watch/` + id)
-  }, [id])
-
-  const next = () => {
-    const lastEpisode = listEpisodes[0].episodeNum
-    const episode = id.split('-')
-    const currentEpisode = episode[episode.length - 1]
-    if (currentEpisode != lastEpisode) {
-      let next = episode.filter((list) => list != currentEpisode)
-      next.push((Number(currentEpisode) + 1).toString())
-      navigate(`/watch/${next.join('-')}`)
-    }
-  }
-  const previous = () => {
-    const firstEpisode = listEpisodes[listEpisodes.length - 1].episodeNum
-    const episode = id.split('-')
-    const currentEpisode = episode[episode.length - 1]
-    if (currentEpisode != firstEpisode) {
-      let next = episode.filter((list) => list != currentEpisode)
-      next.push((Number(currentEpisode) - 1).toString())
-      navigate(`/watch/${next.join('-')}`)
-    }
-  }
-
-  async function getAnimeWatch(param) {
+  async function getAnimeWatch() {
     setLoading(true)
     try {
-      // VIDEO ANIME
-      // const res = await fetch(param)
-      // const result = await res.json()
-      // setRequest(result.sources_bk[0].file)
+      const res = await fetch(`${url}/vidcdn/watch/${id}`)
+      const result = await res.json()
+      setRequest(result.sources_bk[0].file)
+    } finally {
+      setLoading(false)
+    }
+  }
 
-      // GET ANIME EPISODES
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    getAnimeWatch()
+
+    async function getListEpisodes() {
       const path = id.split('-')
       path.pop()
       path.pop()
+      if (path[path.length - 1] === 'dub') {
+        path.pop()
+      }
       const baseUrl = `${url}/anime-details`
 
       const animeUrl = [
@@ -97,15 +81,45 @@ export default function AnimeWatch() {
           dub: { values: [], empty: true },
         })
       }
-    } finally {
-      setLoading(false)
     }
+    getListEpisodes()
+  }, [id])
+
+  const location = id.split('-')
+  const currentEpisode = location[location.length - 1]
+  const next = () => {
+    const isDub = location[location.length - 3] === 'dub'
+    if (loading) {
+      return
+    }
+    if (isDub) {
+      const last = listEpisodes.dub.values.length - 1
+      if (currentEpisode == listEpisodes.dub.values[last].episodeNum) {
+        return
+      }
+    } else {
+      const last = listEpisodes.sub.values.length - 1
+      if (currentEpisode == listEpisodes.sub.values[last].episodeNum) {
+        return
+      }
+    }
+    const next = location.filter((list) => list != currentEpisode)
+    next.push((Number(currentEpisode) + 1).toString())
+    navigate(`/watch/${next.join('-')}`)
+  }
+  const previous = () => {
+    if (loading || currentEpisode == '1') {
+      return
+    }
+    const next = location.filter((list) => list != currentEpisode)
+    next.push((Number(currentEpisode) - 1).toString())
+    navigate(`/watch/${next.join('-')}`)
   }
 
   const play = {
     fill: true,
     fluid: true,
-    autoplay: true,
+    autoplay: false,
     controls: true,
     preload: 'metadata',
     sources: [
@@ -155,8 +169,7 @@ export default function AnimeWatch() {
         {loading ? (
           <Skeleton className='h-52 sm:h-80 md:h-96 lg:h-[33rem]' />
         ) : (
-          // <Video {...play} />
-          <></>
+          <Video {...play} />
         )}
         <div className='mt-6 space-y-4 text-white'>
           <div>
@@ -172,12 +185,15 @@ export default function AnimeWatch() {
                 <>
                   {listEpisodes.sub.values.map((item) => {
                     return (
-                      <li
-                        key={item.episodeId}
-                        className='grid place-content-center rounded-sm w-16 h-9 border-2 border-slate-400'
-                        onClick={() => getAnimeWatch(url + item.episodeId)}
-                      >
-                        {item.episodeNum}
+                      <li key={item.episodeId}>
+                        <Link
+                          to={`/watch/${item.episodeId}`}
+                          className={`${
+                            id === item.episodeId && 'bg-sky-400 text-black'
+                          } grid place-content-center rounded-sm w-16 h-9 border-2 border-slate-400`}
+                        >
+                          {item.episodeNum}
+                        </Link>
                       </li>
                     )
                   })}
@@ -201,12 +217,15 @@ export default function AnimeWatch() {
                   ) : (
                     listEpisodes.dub.values.map((item) => {
                       return (
-                        <li
-                          key={item.episodeId}
-                          className='grid place-content-center rounded-sm w-16 h-9 border-2 border-slate-400'
-                          onClick={() => getAnimeWatch(url + item.episodeId)}
-                        >
-                          {item.episodeNum}
+                        <li key={item.episodeId}>
+                          <Link
+                            to={`/watch/${item.episodeId}`}
+                            className={`${
+                              id === item.episodeId && 'bg-sky-400 text-black'
+                            } grid place-content-center rounded-sm w-16 h-9 border-2 border-slate-400`}
+                          >
+                            {item.episodeNum}
+                          </Link>
                         </li>
                       )
                     })
