@@ -10,9 +10,9 @@ export default function CardTopAiring({
 }) {
   return (
     <>
-      <li className='flex gap-2 text-sm text-slate-300 bg-zinc-700 max-h-40 rounded overflow-hidden p-2'>
+      <li className='flex gap-2 text-sm text-slate-300 bg-zinc-900 max-h-40 rounded overflow-hidden p-2'>
         <Link to={`/anime/${animeId}`}>
-          <img src={animeImg} alt={animeId} className='max-w-[6rem] h-full' />
+          <img src={animeImg} alt={animeId} className='max-w-[6rem] min-w-[6rem] h-full' />
         </Link>
         <div>
           <Link to={`/anime/${animeId}`}>
@@ -35,7 +35,7 @@ export default function CardTopAiring({
           <div className='flex gap-1'>
             <span>Latest:</span>
             <Link
-              to={`/anime/watch/${
+              to={`/watch/${
                 animeId + '-' + latestEp.toLowerCase().split(' ').join('-')
               }`}
               className='text-white'

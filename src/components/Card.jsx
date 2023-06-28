@@ -5,6 +5,7 @@ export default function Card({
   animeImg,
   animeTitle,
   episodeNum,
+  episodeId,
   releasedDate,
   children,
   status,
@@ -14,7 +15,7 @@ export default function Card({
       key={animeId}
       className='relative text-sm text-center group overflow-hidden text-white max-h-60 sm:max-h-56 lg:max-h-60'
     >
-      <Link to={`/anime/${animeId}`}>
+      <Link to={episodeId ? `/watch/${episodeId}` : `/anime/${animeId}`}>
         <img src={animeImg} alt={animeTitle} className='h-full min-w-full' />
         <span
           className={`absolute bottom-0 -right-[1px] left-0 translate-y-9 px-2 py-1 h-16 group-hover:h-12 group-hover:translate-y-0 duration-500 line-clamp-2 bg-black/70`}

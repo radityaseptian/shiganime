@@ -11,7 +11,7 @@ export default function TopAiring() {
   const [loading, setLoading] = useState(true)
   const url = import.meta.env.VITE_URL
 
-  const initTopAiring = async (num = 1) => {
+  const initTopAiring = async (_, num = 1) => {
     setLoading(true)
     await fetch(`${url}/top-airing?page=${num}`)
       .then((res) => res.json())
@@ -22,12 +22,8 @@ export default function TopAiring() {
     initTopAiring()
   }, [])
 
-  const handleChangePagination = (_, number) => {
-    initTopAiring(number)
-  }
-
   return (
-    <section className='my-10'>
+    <section className='my-14'>
       <div className='p-2 bg-sky-400'>
         <h2 className='text-lg'>Popular On Going Update</h2>
       </div>
@@ -36,17 +32,14 @@ export default function TopAiring() {
           <>
             {arrayLength(10).map((i) => {
               return (
-                <>
-                  <div key={i} className='bg-zinc-700 rounded flex gap-1 pr-2'>
-                    <Skeleton height={136} width={98} className='m-2' />
-                    <Skeleton
-                      count={3}
-                      height={20}
-                      containerClassName='flex-1'
-                      className='mt-4'
-                    />
+                <div key={i} className='flex gap-2 p-2 pt-1 bg-zinc-900'>
+                  <Skeleton height={136} width={98} />
+                  <div className='flex-1 flex flex-col space-y-2 pt-2'>
+                    <Skeleton containerClassName='w-full' />
+                    <Skeleton containerClassName='max-w-[12rem]' />
+                    <Skeleton containerClassName='max-w-[7rem]' />
                   </div>
-                </>
+                </div>
               )
             })}
           </>
@@ -81,7 +74,7 @@ export default function TopAiring() {
           hidePrevButton
           variant='outlined'
           shape='rounded'
-          onChange={handleChangePagination}
+          onChange={initTopAiring}
         />
       </div>
     </section>

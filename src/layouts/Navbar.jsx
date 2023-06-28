@@ -1,131 +1,144 @@
-import { BiArrowToTop } from 'react-icons/bi'
-import { FiSearch } from 'react-icons/fi'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-const navbar = [
-  {
-    name: 'Home',
-    path: '/',
-  },
-  {
-    name: 'Genre',
-    path: '/genre-list',
-  },
-  {
-    name: 'Movie',
-    path: '/movie',
-  },
-  {
-    name: 'Dubbing',
-    path: '/dubbing',
-  },
-  {
-    name: 'Chinese',
-    path: '/chinese',
-  },
-]
+import Genres from './Genres'
 
-export default function Navbar() {
-  const [slider, setSlider] = useState(false)
-  const [value, setValue] = useState('')
-  const [target, setTarget] = useState('')
+import { HiHome } from 'react-icons/hi'
+import { BiArrowToTop } from 'react-icons/bi'
+import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi'
+import { IoSearch, IoClose } from 'react-icons/io5'
+import { FaChevronLeft } from 'react-icons/fa'
+import { AiOutlineGithub } from 'react-icons/ai'
+import { RxHamburgerMenu } from 'react-icons/rx'
+
+export default function Navbar({ random = [] }) {
   const navigate = useNavigate()
+  const [slider, setSlider] = useState(false)
+  const [showSearch, setShowSearch] = useState(false)
 
-  const search = (e) => {
-    if (e.key == 'Enter') {
-      if (value.length >= 3) {
-        const split = e.target.value.split(' ').join('-')
-        navigate(`/search/${split}`)
-      }
-    }
+  const animeRandom = () => {
+    const href = Math.floor(Math.random() * random.length)
+    navigate('/anime/' + random[href].animeId)
   }
-
-  useEffect(() => {
-    if (location.pathname === '/') {
-      setTarget('/home')
-    } else {
-      setTarget(location.pathname)
-    }
-  }, [])
 
   return (
     <>
-      <nav className='bg-sky-400'>
-        <div className='max-w-6xl mx-auto'>
-          <div className='h-24 box-border antialiased flex md:flex-row flex-col justify-between py-1'>
-            <div className='grid px-20 pb-1 place-content-center flex-1 md:flex-none'>
-              <Link to='/'>
-                <h1 className='text-5xl font-dancing'>Shiganime.</h1>
-              </Link>
+      <nav className='bg-zinc-900 text-[#e9e8e8] fixed inset-0 bottom-auto z-50 py-2'>
+        <div className='max-w-6xl mx-auto flex justify-between px-2'>
+          <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-2'>
+              <div className='flex items-center gap-2'>
+                <FaChevronLeft
+                  title='Back'
+                  onClick={() => history.back()}
+                  className='hover:text-white cursor-pointer h-5 w-5 mt-[.10rem]'
+                />
+                <Link to='/' title='Home'>
+                  <HiHome className='w-6 h-6 hover:text-white' />
+                </Link>
+              </div>
+              <Title className='hidden md:block' />
+              {!showSearch ? (
+                <Title className='md:hidden' />
+              ) : (
+                <SearchInput className='md:hidden' />
+              )}
             </div>
-            <div className='flex md:flex-1 justify-between items-center '>
-              <div
-                onClick={() => setSlider(!slider)}
-                className='flex flex-col md:hidden bg-sky-500 p-2 rounded gap-1 cursor-pointer mx-4'
-              >
-                <span className='h-1 w-7 rounded bg-white'></span>
-                <span className='h-1 w-7 rounded bg-white'></span>
-                <span className='h-1 w-7 rounded bg-white'></span>
-              </div>
-              <div className='md:self-end relative mx-2 flex-1 overflow-hidden rounded'>
-                <input
-                  value={value}
-                  onKeyDown={search}
-                  onChange={(e) => setValue(e.target.value)}
-                  type='text'
-                  placeholder='Search anime...'
-                  className='text-sm w-full h-8 focus:outline-none pl-2 pr-10'
-                />
-                <FiSearch
-                  onClick={search}
-                  className='absolute right-0 top-0 box-content p-2 cursor-pointer'
-                />
-              </div>
+            <SearchInput className='hidden md:block' />
+            <div className='hidden md:block'>
+              <Helper onClick={animeRandom} />
             </div>
           </div>
-          {slider && (
-            <>
-              <ul className='overflow-hidden text-sm p-2 md:hidden bg-sky-500 text-white space-y-2'>
-                {navbar.map(({ name, path }) => {
-                  let newPathTarget = path === '/' ? '/home' : path
-                  return (
-                    <li key={name}>
-                      <Link
-                        to={path}
-                        className={`${
-                          target === newPathTarget && 'bg-sky-400'
-                        } block p-2 hover:bg-sky-400`}
-                      >
-                        {name}
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-            </>
-          )}
-          <ul className='hidden md:flex justify-between p-2 gap-2'>
-            {navbar.map(({ name, path }) => {
-              let newPathTarget = path === '/' ? '/home' : path
-              return (
-                <li
-                  key={name}
-                  className={`${
-                    target === newPathTarget && 'bg-sky-600 text-white'
-                  } flex-1 text-center overflow-hidden bg-sky-500 hover:bg-sky-600 hover:text-white`}
-                >
-                  <Link to={path} className='py-2 block'>
-                    {name}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
+          <div className='flex gap-2 items-center ml-1 md:hidden'>
+            <div onClick={() => setShowSearch(!showSearch)}>
+              {!showSearch ? (
+                <IoSearch className='h-6 w-6 cursor-pointer' />
+              ) : (
+                <IoClose className='h-8 w-8 cursor-pointer' />
+              )}
+            </div>
+            <RxHamburgerMenu
+              onClick={() => setSlider(!slider)}
+              className='h-7 w-7 cursor-pointer'
+            />
+          </div>
         </div>
       </nav>
+      {slider && (
+        <div className='md:hidden fixed z-50 max-h-[calc(100vh-3rem)] overflow-hidden overflow-y-scroll bottom-0 right-0 bg-zinc-800'>
+          <div className='p-2'>
+            <Helper onClick={animeRandom} />
+          </div>
+          <Genres />
+        </div>
+      )}
+      {/* Empty Point for handle display fixed navbar */}
+      <div className='h-12 md:h-14'></div>
       <BackToTop />
     </>
+  )
+}
+
+function Title({ className }) {
+  return (
+    <Link to='/' title='Shiganime' className={className}>
+      <h1 className='text-2xl md:text-3xl font-medium hover:text-white'>
+        SHIGANIME
+      </h1>
+    </Link>
+  )
+}
+
+function SearchInput({ className }) {
+  const input = useRef(null)
+  const navigate = useNavigate()
+  const search = (e) => {
+    if (e.key == 'Enter' || e.type == 'click') {
+      const str = input.current.value.trim()
+      if (str.length >= 3) {
+        navigate(`/search/${str.split(' ').join('-')}`)
+      }
+    }
+  }
+  return (
+    <label title='Search' htmlFor='text' className={`${className} relative`}>
+      <input
+        onKeyDown={search}
+        ref={input}
+        id='text'
+        type='text'
+        placeholder='Search...'
+        className='w-full outline outline-1 outline-slate-700 focus:outline-sky-400 bg-[#131313] px-2 md:pr-9 py-1 rounded placeholder:text-white/50'
+      />
+      <IoSearch
+        onClick={search}
+        className='hidden md:block absolute box-content p-1 right-1 top-[.20rem] w-5 h-5 text-white/50 cursor-pointer'
+      />
+    </label>
+  )
+}
+
+function Helper(props) {
+  return (
+    <div className='flex items-center gap-3 font-mono text-[#e9e8e8]'>
+      <div
+        {...props}
+        title='Random'
+        className='flex items-center gap-1 cursor-pointer hover:text-white'
+      >
+        <GiPerspectiveDiceSixFacesRandom className='w-5 h-5' />
+        <span>Random</span>
+      </div>
+      <a
+        title='Github'
+        href='https://github.com/radityaseptian'
+        target='_blank'
+        className='flex items-center gap-1 cursor-pointer hover:text-white'
+      >
+        <AiOutlineGithub className='w-5 h-5' />
+        <span>Github</span>
+      </a>
+    </div>
   )
 }
 
@@ -143,7 +156,7 @@ function BackToTop() {
     <>
       <BiArrowToTop
         onClick={toTop}
-        className='scroll-smooth z-50 text-white p-3 sm:p-4 fixed bottom-6 right-6 rounded-md cursor-pointer box-content bg-black/20 hover:bg-black/30'
+        className='scroll-smooth z-30 text-white p-3 sm:p-4 fixed bottom-6 right-6 rounded-md cursor-pointer box-content bg-black/20 hover:bg-black/30'
       />
     </>
   )

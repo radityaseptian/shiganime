@@ -1,34 +1,40 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useParams, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+
+import { arrayLength } from '../arrayLength'
+
 import Navbar from '../layouts/Navbar'
 import Footer from '../layouts/Footer'
-import { useEffect, useState } from 'react'
+
+import Title from '../components/Title'
 import Video from '../components/Video'
+
 import Skeleton from 'react-loading-skeleton'
-import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 
 export default function AnimeWatch() {
   const navigate = useNavigate()
   const [request, setRequest] = useState('')
   const [loading, setLoading] = useState(true)
-  const [listEpisodes, setListEpisodes] = useState([])
-  const { id } = useParams()
-  const url = `${import.meta.env.VITE_URL}/vidcdn/watch/${id}`
-  const animeVideoList = id.split('-')
-  animeVideoList.pop()
-  animeVideoList.pop()
-  const urlAnimeDetails = `${
-    import.meta.env.VITE_URL
-  }/anime-details/${animeVideoList.join('-')}`
 
-  const RefreshToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+  const initial = {
+    sub: {
+      empty: true,
+      values: [],
+    },
+    sub: {
+      empty: true,
+      values: [],
+    },
   }
+  const [listEpisodes, setListEpisodes] = useState(initial)
+
+  const { id } = useParams()
+  const url = import.meta.env.VITE_URL
 
   useEffect(() => {
-    RefreshToTop()
-    getAnimeWatch()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    getAnimeWatch(`${url}/vidcdn/watch/` + id)
   }, [id])
 
   const next = () => {
@@ -38,7 +44,7 @@ export default function AnimeWatch() {
     if (currentEpisode != lastEpisode) {
       let next = episode.filter((list) => list != currentEpisode)
       next.push((Number(currentEpisode) + 1).toString())
-      navigate(`/anime/watch/${next.join('-')}`)
+      navigate(`/watch/${next.join('-')}`)
     }
   }
   const previous = () => {
@@ -48,26 +54,54 @@ export default function AnimeWatch() {
     if (currentEpisode != firstEpisode) {
       let next = episode.filter((list) => list != currentEpisode)
       next.push((Number(currentEpisode) - 1).toString())
-      navigate(`/anime/watch/${next.join('-')}`)
+      navigate(`/watch/${next.join('-')}`)
     }
   }
 
-  async function getAnimeWatch() {
+  async function getAnimeWatch(param) {
     setLoading(true)
     try {
       // VIDEO ANIME
-      const res = await fetch(url)
-      const result = await res.json()
-      setRequest(result.sources_bk[0].file)
+      // const res = await fetch(param)
+      // const result = await res.json()
+      // setRequest(result.sources_bk[0].file)
 
-      // GET ANIME EPISODES LISTS
-      const response = await fetch(urlAnimeDetails)
-      const resolve = await response.json()
-      setListEpisodes(resolve.episodesList)
+      // GET ANIME EPISODES
+      const path = id.split('-')
+      path.pop()
+      path.pop()
+      const baseUrl = `${url}/anime-details`
+
+      const animeUrl = [
+        `${baseUrl}/${path.join('-')}`,
+        `${baseUrl}/${path.join('-')}-dub`,
+      ]
+      const responses = await Promise.all(
+        animeUrl.map(async (url) => {
+          const response = await fetch(url)
+          const data = await response.json()
+          return data
+        })
+      )
+      const subtitle = responses[0].episodesList
+      const dubbing = responses[1].episodesList
+
+      if (typeof dubbing !== 'undefined') {
+        setListEpisodes({
+          sub: { values: subtitle.reverse(), empty: false },
+          dub: { values: dubbing.reverse(), empty: false },
+        })
+      } else {
+        setListEpisodes({
+          sub: { values: subtitle.reverse(), empty: false },
+          dub: { values: [], empty: true },
+        })
+      }
     } finally {
       setLoading(false)
     }
   }
+
   const play = {
     fill: true,
     fluid: true,
@@ -99,61 +133,91 @@ export default function AnimeWatch() {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <title>Watch - {id.split('-').join(' ')}</title>
       </Helmet>
-      <div className='bg-zinc-700'>
-        <Navbar />
-        <div className='container bg-zinc-800 mx-auto max-w-5xl p-2 mt-2'>
-          <div className='bg-sky-400 mb-2 p-2 antialiased flex flex-col sm:items-center sm:flex-row justify-between'>
-            <h1 className='text-base capitalize'>{id.split('-').join(' ')}</h1>
-            <div className='flex gap-3 text-xs mt-2 sm:mt-0 sm:pr-2 text-white'>
-              <button
-                onClick={previous}
-                className='p-2 bg-sky-500 hover:bg-sky-600 rounded'
-              >
-                Previous Eps.
-              </button>
-              <button
-                onClick={next}
-                className='p-2 bg-sky-500 hover:bg-sky-600 rounded'
-              >
-                Next Eps.
-              </button>
-            </div>
+      <Navbar />
+      <div className='container bg-zinc-800 mx-auto max-w-5xl p-2 mt-2'>
+        <div className='flex flex-wrap gap-4 items-center justify-between mb-2 p-2 bg-sky-400 '>
+          <h1 className='text-base capitalize'>{id.split('-').join(' ')}</h1>
+          <div className='flex gap-3 text-xs text-white'>
+            <button
+              onClick={previous}
+              className='p-2 bg-sky-500 hover:bg-sky-600 rounded'
+            >
+              Previous Eps.
+            </button>
+            <button
+              onClick={next}
+              className='p-2 bg-sky-500 hover:bg-sky-600 rounded'
+            >
+              Next Eps.
+            </button>
           </div>
-          {loading ? (
-            <Skeleton className='h-52 sm:h-80 md:h-96 lg:h-[33rem]' />
-          ) : (
-            <Video {...play} />
-          )}
-          <div className='mt-3'>
-            <p className='bg-sky-500 py-2 pl-2 text-sm lg:text-md'>
-              LIST EPISODE
-            </p>
-            <ul className='overflow-y-auto max-h-[70vh] text-sm lg:text-md'>
-              {loading ? <Skeleton count={5} height={25} /> : (
+        </div>
+        {loading ? (
+          <Skeleton className='h-52 sm:h-80 md:h-96 lg:h-[33rem]' />
+        ) : (
+          // <Video {...play} />
+          <></>
+        )}
+        <div className='mt-6 space-y-4 text-white'>
+          <div>
+            <Title title='Sub' />
+            <ul className='flex flex-wrap flex-initial gap-2 pt-2 text-sm lg:text-md'>
+              {loading ? (
                 <>
-                  {listEpisodes.map((list, i) => {
+                  {arrayLength(20).map(() => {
+                    return <Skeleton containerClassName='w-16' height={36} />
+                  })}
+                </>
+              ) : (
+                <>
+                  {listEpisodes.sub.values.map((item) => {
                     return (
-                      <>
-                        <li key={i} className='pt-1'>
-                          <Link
-                            to={`/anime/watch/${list.episodeId}`}
-                            className='py-1 pl-2 block bg-sky-300 hover:bg-sky-400 hover:underline'
-                          >
-                            Episode {list.episodeNum}
-                          </Link>
-                        </li>
-                      </>
+                      <li
+                        key={item.episodeId}
+                        className='grid place-content-center rounded-sm w-16 h-9 border-2 border-slate-400'
+                        onClick={() => getAnimeWatch(url + item.episodeId)}
+                      >
+                        {item.episodeNum}
+                      </li>
                     )
                   })}
                 </>
               )}
             </ul>
           </div>
-        </div>
-        <div className='container mx-auto max-w-6xl'>
-          <Footer />
+          <div>
+            <Title title='Dub' />
+            <ul className='flex flex-wrap flex-initial gap-2 pt-2 text-sm lg:text-md'>
+              {loading ? (
+                <>
+                  {arrayLength(20).map(() => {
+                    return <Skeleton containerClassName='w-16' height={36} />
+                  })}
+                </>
+              ) : (
+                <>
+                  {listEpisodes.dub.empty ? (
+                    <p className='text-lg py-4'>Not Found!</p>
+                  ) : (
+                    listEpisodes.dub.values.map((item) => {
+                      return (
+                        <li
+                          key={item.episodeId}
+                          className='grid place-content-center rounded-sm w-16 h-9 border-2 border-slate-400'
+                          onClick={() => getAnimeWatch(url + item.episodeId)}
+                        >
+                          {item.episodeNum}
+                        </li>
+                      )
+                    })
+                  )}
+                </>
+              )}
+            </ul>
+          </div>
         </div>
       </div>
+      <Footer />
     </>
   )
 }

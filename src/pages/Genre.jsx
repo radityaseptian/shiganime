@@ -1,43 +1,61 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import Navbar from '../layouts/Navbar'
 import Content from '../layouts/Content'
 import Footer from '../layouts/Footer'
-import { useEffect, useState } from 'react'
+import Recommendation from '../layouts/Recommendation'
+import Genres from '../layouts/Genres'
+
 import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
+import Skeleton from 'react-loading-skeleton'
+
 import Card from '../components/Card'
 import Container from '../components/Container'
-import Rekomendasi from '../layouts/Rekomendasi'
-import Skeleton from 'react-loading-skeleton'
+import Title from '../components/Title'
+import MoreButton from '../components/MoreButton'
+
 import { arrayLength } from '../arrayLength'
-import notFoundImg from '/404.webp'
 
 export default function Movie() {
-  const [genre, setGenre] = useState([])
+  const [anime, setAnime] = useState([])
   const [notFound, setNotFound] = useState(false)
   const [loading, setLoading] = useState(true)
-  const { id } = useParams()
-  const url = `${import.meta.env.VITE_URL}/genre/${id}`
 
-  useEffect(() => {
-    initGenre()
-  }, [])
-  const initGenre = async (num = 1) => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-    setLoading(true)
+  const [more, setMore] = useState(true)
+  const [loadingFetch, setLoadingFetch] = useState(false)
+  const [count, setCount] = useState(2)
+
+  const { slug } = useParams()
+  const url = `${import.meta.env.VITE_URL}/genre/${slug}`
+
+  const getGenreBySlug = async (num = 1, refresh = true) => {
+    setNotFound(false)
     await fetch(`${url}?page=${num}`)
       .then((res) => res.json())
       .then((res) => {
-        if (res.error || res.length == 0) {
+        if (res.error && refresh) {
           return setNotFound(true)
         }
-        setGenre(res)
+        res.length < 20 ? setMore(false) : setMore(true)
+        refresh ? (setAnime(res), setCount(2)) : setAnime([...anime, ...res])
       })
-      .finally(() => setLoading(false))
+      .finally(() => {
+        setLoading(false)
+        setLoadingFetch(false)
+      })
   }
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setLoading(true)
+    getGenreBySlug()
+  }, [slug])
 
-  const handleChangePagination = (_, number) => {
-    initGenre(number)
+  const getMore = () => {
+    setLoadingFetch(true)
+    if (!loading || !loadingFetch) {
+      getGenreBySlug(count, false)
+      setCount(count + 1)
+    }
   }
 
   return (
@@ -46,7 +64,7 @@ export default function Movie() {
         <meta charset='UTF-8' />
         <meta
           name='description'
-          content={`Watch Anime Genre ${id} Subtitle English - Shiganime`}
+          content={`Watch Anime Genre ${slug} Subtitle English - Shiganime`}
         />
         <meta
           name='keywords'
@@ -54,59 +72,61 @@ export default function Movie() {
         />
         <meta name='author' content='Raditya Septian' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-        <title>Genre - {id}</title>
+        <title>Genre - {slug}</title>
       </Helmet>
-      <div className='bg-zinc-700'>
-        <Navbar />
-        <Container>
-          {notFound ? (
-            <>
-              <img
-                src={notFoundImg}
-                className='self-start mb-2 lg:w-10/12'
-                alt='Not Found!'
+      <Navbar />
+      <Container>
+        {notFound ? (
+          <>
+            <img
+              src='/404.webp'
+              className='self-start mb-2 lg:w-10/12'
+              alt='Not Found!'
+            />
+          </>
+        ) : (
+          <div className='w-full'>
+            <Title title={`Genre - ${slug}`} />
+            <Content>
+              {loading ? (
+                <>
+                  {arrayLength(20).map((i) => {
+                    return <Skeleton key={i} className='h-40 sm:h-56 md:h-52' />
+                  })}
+                </>
+              ) : (
+                <>
+                  {anime.map((item) => {
+                    return (
+                      <>
+                        <Card
+                          key={item.animeId}
+                          animeImg={item.animeImg}
+                          releasedDate={item.releasedDate}
+                          animeId={item.animeId}
+                        >
+                          {item.animeTitle}
+                        </Card>
+                      </>
+                    )
+                  })}
+                </>
+              )}
+            </Content>
+            {more && (
+              <MoreButton
+                onClick={getMore}
+                text={!loadingFetch ? 'More' : 'Wait'}
               />
-            </>
-          ) : (
-            <>
-              <Content
-                title={`Genre - ${id}`}
-                pagination={30}
-                onChange={handleChangePagination}
-              >
-                {loading ? (
-                  <>
-                    {arrayLength(20).map((i) => {
-                      return (
-                        <Skeleton key={i} className='h-40 sm:h-56 md:h-52' />
-                      )
-                    })}
-                  </>
-                ) : (
-                  <>
-                    {genre.map((item) => {
-                      return (
-                        <>
-                          <Card
-                            key={item.animeId}
-                            animeImg={item.animeImg}
-                            releasedDate={item.releasedDate}
-                            animeId={item.animeId}
-                          >
-                            {item.animeTitle}
-                          </Card>
-                        </>
-                      )
-                    })}
-                  </>
-                )}
-              </Content>
-            </>
-          )}
-          <Rekomendasi />
-        </Container>
-        <Footer />
-      </div>
+            )}
+          </div>
+        )}
+        <div className='space-y-2'>
+          <Genres className='hidden md:block' />
+          <Recommendation />
+        </div>
+      </Container>
+      <Footer />
     </>
   )
 }

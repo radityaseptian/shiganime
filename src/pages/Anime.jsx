@@ -3,9 +3,9 @@ import { useParams, Link } from 'react-router-dom'
 import Navbar from '../layouts/Navbar'
 import Footer from '../layouts/Footer'
 import { useEffect, useState } from 'react'
-import Rekomendasi from '../layouts/Rekomendasi'
 import Skeleton from 'react-loading-skeleton'
 import { Helmet } from 'react-helmet'
+import Title from '../components/Title'
 
 export default function Anime() {
   const [anime, setAnime] = useState({})
@@ -20,12 +20,10 @@ export default function Anime() {
       .finally(() => setLoading(false))
   }
   useEffect(() => {
-    getAnime()
-    RefeshToTop()
-  }, [id])
-  const RefeshToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+    getAnime()
+  }, [id])
+
   const title =
     id.split('-').join(' ').charAt(0).toUpperCase() +
     id.split('-').join(' ').slice(1) +
@@ -49,11 +47,9 @@ export default function Anime() {
         <title>{title}</title>
       </Helmet>
       <Navbar />
-      <div className='pt-2 text-sm lg:text-md text-white bg-zinc-700'>
+      <div className='pt-2 text-sm lg:text-md text-white'>
         <div className='bg-zinc-800 mx-auto max-w-5xl p-2'>
-          <div className='grid place-content-center bg-sky-400 p-2 text-center text-base text-black min-h-[2.73rem]'>
-            <h1>{anime.animeTitle}</h1>
-          </div>
+          <Title title={anime.animeTitle || 'wait...'} center={true} />
           <div className='flex justify-between pt-2'>
             {loading ? (
               <>
@@ -68,7 +64,7 @@ export default function Anime() {
               </>
             ) : (
               <>
-                <div className='w-32 h-48 md:w-36 md:h-52 lg:w-40 lg:h-60'>
+                <div className='w-32 h-48 md:w-36 md:h-52 lg:w-40 lg:h-60 duration-0'>
                   <img
                     src={anime.animeImg}
                     alt={anime.animeTitle}
@@ -127,8 +123,8 @@ export default function Anime() {
               </td>
             </tr>
           </table>
-          <div className='mb-4 text-black pt-4'>
-            <p className='bg-sky-500 py-2 pl-2'>LIST EPISODE</p>
+          <div className=' text-black pt-4'>
+            <Title title='List Episode' />
             <ul className='overflow-y-auto max-h-[70vh]'>
               {loading ? (
                 <Skeleton count={5} height={25} />
@@ -140,7 +136,7 @@ export default function Anime() {
                         <>
                           <li key={list.episodeNum} className='pt-1'>
                             <Link
-                              to={`/anime/watch/${list.episodeId}`}
+                              to={`/watch/${list.episodeId}`}
                               className='py-1 pl-2 block bg-sky-300 hover:bg-sky-400 hover:underline'
                             >
                               Episode {list.episodeNum}
@@ -153,7 +149,6 @@ export default function Anime() {
               )}
             </ul>
           </div>
-          <Rekomendasi className='lg:grid-cols-6' lgFull={true} />
         </div>
         <Footer />
       </div>
