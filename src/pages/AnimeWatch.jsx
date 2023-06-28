@@ -23,7 +23,7 @@ export default function AnimeWatch() {
       empty: true,
       values: [],
     },
-    sub: {
+    dub: {
       empty: true,
       values: [],
     },
@@ -182,6 +182,7 @@ export default function AnimeWatch() {
           <Skeleton className='h-52 sm:h-80 md:h-96 lg:h-[33rem]' />
         ) : (
           <Video {...play} />
+          // <iframe src={streaming} frameborder="0"></iframe>\
         )}
         <div className='mt-6 space-y-4 text-white'>
           <div>
