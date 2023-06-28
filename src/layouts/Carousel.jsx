@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import Skeleton from 'react-loading-skeleton'
 
@@ -17,7 +18,7 @@ export default function Slider() {
       const animeUrl = [
         `${url}/one-piece`,
         `${url}/yakusoku-no-neverland`,
-        `${url}/berserk-ougon-jidai-hen-memorial-edition`,
+        `${url}/tokyo-ghoul`,
         `${url}/made-in-abyss`,
         `${url}/mushishi`,
       ]
@@ -82,14 +83,34 @@ export default function Slider() {
         </div>
       ) : (
         <div>
-          <img
-            src={animeSlider[currentImage]?.animeImg}
-            className='max-w-[7rem] min-w-[7rem] h-full relative'
-          />
+          <Link
+            to={
+              '/anime/' +
+              animeSlider[currentImage]?.animeTitle
+                .split(' ')
+                .join('-')
+                .toLowerCase()
+            }
+          >
+            <img
+              src={animeSlider[currentImage]?.animeImg}
+              className='max-w-[7rem] min-w-[7rem] h-full relative'
+            />
+          </Link>
           <div className='p-3 space-y-2 absolute inset-0 left-28'>
-            <h2 className='text-sky-400 line-clamp-1 text-base md:text-lg'>
-              {animeSlider[currentImage]?.animeTitle}
-            </h2>
+            <Link
+              to={
+                '/anime/' +
+                animeSlider[currentImage]?.animeTitle
+                  .split(' ')
+                  .join('-')
+                  .toLowerCase()
+              }
+            >
+              <h2 className='text-sky-400 line-clamp-1 text-base md:text-lg'>
+                {animeSlider[currentImage]?.animeTitle}
+              </h2>
+            </Link>
             <p className='line-clamp-3'>
               {animeSlider[currentImage]?.synopsis}
             </p>

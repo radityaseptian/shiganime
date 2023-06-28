@@ -23,7 +23,7 @@ export default function Navbar({ random = [] }) {
 
   return (
     <>
-      <nav className='bg-zinc-900 text-[#e9e8e8] fixed inset-0 bottom-auto z-50 py-2'>
+      <nav className='bg-zinc-900 text-[#e9e8e8] fixed inset-0 bottom-auto z-50 py-3'>
         <div className='max-w-6xl mx-auto flex justify-between px-2'>
           <div className='flex items-center gap-4'>
             <div className='flex items-center gap-2'>
@@ -49,23 +49,23 @@ export default function Navbar({ random = [] }) {
               <Helper onClick={animeRandom} />
             </div>
           </div>
-          <div className='flex gap-2 items-center ml-1 md:hidden'>
+          <div className='flex gap-3 items-center ml-1 md:hidden'>
             <div onClick={() => setShowSearch(!showSearch)}>
               {!showSearch ? (
-                <IoSearch className='h-6 w-6 cursor-pointer' />
+                <IoSearch className='h-7 w-7 cursor-pointer' />
               ) : (
                 <IoClose className='h-8 w-8 cursor-pointer' />
               )}
             </div>
             <RxHamburgerMenu
               onClick={() => setSlider(!slider)}
-              className='h-7 w-7 cursor-pointer'
+              className='h-8 w-8 cursor-pointer'
             />
           </div>
         </div>
       </nav>
       {slider && (
-        <div className='md:hidden fixed z-50 max-h-[calc(100vh-3rem)] overflow-hidden overflow-y-scroll bottom-0 right-0 bg-zinc-800'>
+        <div className='md:hidden fixed z-40 right-0 bottom-0 top-14 max-h-screen overflow-hidden overflow-y-scroll bg-zinc-800'>
           <div className='p-2'>
             <Helper onClick={animeRandom} />
           </div>
@@ -156,7 +156,7 @@ function BackToTop() {
     <>
       <BiArrowToTop
         onClick={toTop}
-        className='scroll-smooth z-30 text-white p-3 sm:p-4 fixed bottom-6 right-6 rounded-md cursor-pointer box-content bg-black/20 hover:bg-black/30'
+        className='scroll-smooth z-30 text-white p-4 fixed bottom-6 right-6 rounded-md cursor-pointer box-content bg-black/20 hover:bg-black/30'
       />
     </>
   )

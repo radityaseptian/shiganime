@@ -74,7 +74,7 @@ export default function Movie() {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <title>Genre - {slug}</title>
       </Helmet>
-      <Navbar />
+      <Navbar random={anime} />
       <Container>
         {notFound ? (
           <>

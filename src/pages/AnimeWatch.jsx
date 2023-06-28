@@ -11,10 +11,11 @@ import Video from '../components/Video'
 
 import Skeleton from 'react-loading-skeleton'
 import { Helmet } from 'react-helmet'
+import { FaDownload, FaListUl } from 'react-icons/fa'
 
 export default function AnimeWatch() {
   const navigate = useNavigate()
-  const [request, setRequest] = useState('')
+  const [data, setData] = useState({ file: '', referer: '' })
   const [loading, setLoading] = useState(true)
 
   const initial = {
@@ -37,7 +38,10 @@ export default function AnimeWatch() {
     try {
       const res = await fetch(`${url}/vidcdn/watch/${id}`)
       const result = await res.json()
-      setRequest(result.sources_bk[0].file)
+      setData({
+        file: result.sources[0].file,
+        referer: result.Referer,
+      })
     } finally {
       setLoading(false)
     }
@@ -124,10 +128,18 @@ export default function AnimeWatch() {
     preload: 'metadata',
     sources: [
       {
-        src: request,
+        src: data.file,
         type: 'application/x-mpegURL',
       },
     ],
+  }
+  let download, streaming
+  if (data.referer) {
+    let server = new URL(data.referer)
+    let server2 = server.href
+    server.pathname = 'download'
+    download = server.href
+    streaming = server2
   }
   return (
     <>
@@ -172,6 +184,28 @@ export default function AnimeWatch() {
           <Video {...play} />
         )}
         <div className='mt-6 space-y-4 text-white'>
+          <div>
+            <Title title='Options' />
+            <div className='pt-2 flex items-center gap-2'>
+              <button>
+                <a
+                  href={download}
+                  target='_blank'
+                  className='flex items-center gap-1 px-4 py-2 border-2 rounded text-white border-slate-400'
+                >
+                  <FaDownload />
+                  <span>Download</span>
+                </a>
+              </button>
+              <Link
+                to={'/anime/' + id.replace(/-episode-\d+$/, '')}
+                className='flex items-center gap-1 px-4 py-2 border-2 rounded border-slate-400'
+              >
+                <FaListUl />
+                <span>Info</span>
+              </Link>
+            </div>
+          </div>
           <div>
             <Title title='Sub' />
             <ul className='flex flex-wrap flex-initial gap-2 pt-2 text-sm lg:text-md'>
