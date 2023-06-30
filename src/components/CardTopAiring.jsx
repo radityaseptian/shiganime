@@ -10,7 +10,10 @@ export default function CardTopAiring({
 }) {
   return (
     <>
-      <li className='flex gap-2 text-sm text-slate-300 bg-zinc-900 max-h-40 rounded overflow-hidden p-2'>
+      <li
+        key={animeId}
+        className='flex gap-2 text-sm text-slate-300 bg-zinc-900 max-h-40 rounded overflow-hidden p-2'
+      >
         <Link to={`/anime/${animeId}`}>
           <img
             src={animeImg}

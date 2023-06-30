@@ -86,10 +86,6 @@ export default function Home() {
   const [state, dispatch] = useReducer(reducer, initial)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    getAnimes()
-  }, [state.activeTab])
-
   const getAnimes = async (_, num = 1) => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
     setLoading(true)
@@ -98,6 +94,10 @@ export default function Home() {
       .then((res) => dispatch(res))
       .finally(() => setLoading(false))
   }
+
+  useEffect(() => {
+    getAnimes()
+  }, [state.activeTab])
 
   return (
     <>
@@ -115,11 +115,12 @@ export default function Home() {
       <Navbar random={state.values} />
       <Container>
         <div className='self-start flex-1'>
-          <Carousel />
+          {/* <Carousel /> */}
           <ul className='flex gap-1 border-b border-slate-400'>
             {tabs.map((item) => {
               return (
                 <li
+                  key={item}
                   onClick={() => dispatch({ payload: item })}
                   className={`${
                     state.activeTab === item

@@ -51,17 +51,15 @@ export default function TopAiring() {
                 item.animeTitle = 'Oshi no Ko'
               }
               return (
-                <>
-                  <CardTopAiring
-                    key={item.animeId}
-                    animeId={item.animeId}
-                    animeImg={item.animeImg}
-                    latestEp={item.latestEp}
-                    genres={item.genres}
-                  >
-                    {item.animeTitle}
-                  </CardTopAiring>
-                </>
+                <CardTopAiring
+                  key={item.animeId}
+                  animeId={item.animeId}
+                  animeImg={item.animeImg}
+                  latestEp={item.latestEp}
+                  genres={item.genres}
+                >
+                  {item.animeTitle}
+                </CardTopAiring>
               )
             })}
           </>
