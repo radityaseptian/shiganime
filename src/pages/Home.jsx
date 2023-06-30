@@ -115,7 +115,7 @@ export default function Home() {
       <Navbar random={state.values} />
       <Container>
         <div className='self-start flex-1'>
-          {/* <Carousel /> */}
+          <Carousel />
           <ul className='flex gap-1 border-b border-slate-400'>
             {tabs.map((item) => {
               return (
