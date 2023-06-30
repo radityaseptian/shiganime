@@ -5,6 +5,7 @@ import Anime from './pages/Anime'
 import AnimeWatch from './pages/AnimeWatch'
 import Search from './pages/Search'
 import Genre from './pages/Genre'
+import About from './pages/About'
 import { RecommendationProvider } from './context/RecommendationContext'
 import { SkeletonTheme } from 'react-loading-skeleton'
 
@@ -20,6 +21,7 @@ export default function App() {
               <Route path='anime/:id' element={<Anime />} />
               <Route path='search/:param' element={<Search />} />
               <Route path='genre/:slug' element={<Genre />} />
+              <Route path='about' element={<About />} />
               <Route path='*' element={<Navigate to='/' />} />
             </Routes>
           </BrowserRouter>

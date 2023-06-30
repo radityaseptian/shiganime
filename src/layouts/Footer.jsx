@@ -1,6 +1,7 @@
 import { FaFacebookF, FaGithub } from 'react-icons/fa'
 import FootList from '../components/FootList'
 import Container from '../components/Container'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
@@ -36,14 +37,24 @@ export default function Footer() {
                 <li className='font-patua text-white'>Sitemap</li>
                 <FootList>Home</FootList>
                 <FootList>Genre</FootList>
-                <FootList>Movie</FootList>
                 <FootList>Search</FootList>
+                <FootList>About</FootList>
                 <FootList>Anime Detail</FootList>
               </ul>
-              <ul className='space-y-1'>
-                <li className='font-patua text-white'>Partner</li>
-                <FootList>No one 😅</FootList>
-              </ul>
+              <div className='space-y-6'>
+                <ul className='space-y-1'>
+                  <li className='font-patua text-white'>Partner</li>
+                  <FootList>No one 😅</FootList>
+                </ul>
+                <ul>
+                  <Link to='/about'>
+                    <li className='font-patua text-white no-underline'>
+                      About
+                    </li>
+                    <FootList>About Shiganime</FootList>
+                  </Link>
+                </ul>
+              </div>
             </div>
             <div className='mt-3 md:mt-0 flex flex-col items-center'>
               <span className='font-patua text-white'>Stay Conected</span>

@@ -2,9 +2,7 @@
 export default function FootList({ children }) {
   return (
     <>
-      <li className='text-sm lg:text-base'>
-        {children}
-      </li>
+      <li className='text-sm lg:text-base hover:text-white'>{children}</li>
     </>
   )
 }
