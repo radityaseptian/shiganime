@@ -1,6 +1,6 @@
 export default function Iframe({ src }) {
   return (
-    <div className='relative w-full h-0 pb-[56.25%]'>
+    <div className='relative w-full h-0 min-h-[16rem] pb-[56.25%]'>
       <iframe
         src={src}
         allowFullScreen={true}
