@@ -27,7 +27,7 @@ export default function TopAiring() {
       <div className='p-2 bg-sky-400'>
         <h2 className='text-lg'>Popular On Going Update</h2>
       </div>
-      <ul className='grid sm:grid-cols-2 gap-2 p-2 bg-zinc-800'>
+      <ul className='grid sm:grid-cols-2 gap-2 p-2 bg-zinc-800 min-h-[12rem]'>
         {loading ? (
           <>
             {arrayLength(10).map((i) => {
@@ -67,7 +67,7 @@ export default function TopAiring() {
       </ul>
       <div className='mt-4 flex justify-center'>
         <Pagination
-          count={50}
+          count={40}
           hideNextButton
           hidePrevButton
           variant='outlined'
