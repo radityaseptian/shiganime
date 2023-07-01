@@ -16,6 +16,7 @@ import Title from '../components/Title'
 import MoreButton from '../components/MoreButton'
 
 import { arrayLength } from '../arrayLength'
+import FacebookPage from '../components/FacebookPage'
 
 export default function Search() {
   const [anime, setAnime] = useState([])
@@ -121,7 +122,8 @@ export default function Search() {
             )}
           </div>
         )}
-        <div className='space-y-2'>
+        <div className='space-y-2 lg:min-w-[17rem] lg:max-w-[17rem]'>
+          <FacebookPage />
           <Genres className='hidden md:block' />
           <Recommendation />
         </div>

@@ -9,7 +9,7 @@ export default function Rekomendasi() {
   const context = useRecommendation()
   return (
     <>
-      <div className='self-start text-sm lg:text-md lg:min-w-[17rem] lg:max-w-[17rem]'>
+      <div className='text-sm lg:text-md'>
         <div className='flex h-[2.73rem] items-center justify-between px-4 bg-sky-400 py-2'>
           <h3 className='text-base'>Recommendation</h3>
           <BsFillHeartFill className='text-red-600' />

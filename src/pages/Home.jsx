@@ -14,6 +14,7 @@ import Genres from '../layouts/Genres'
 
 import Container from '../components/Container'
 import Card from '../components/Card'
+import FacebookPage from '../components/FacebookPage'
 
 import { arrayLength } from '../arrayLength'
 
@@ -177,7 +178,8 @@ export default function Home() {
           </div>
           <TopAiring />
         </div>
-        <div className='space-y-2'>
+        <div className='space-y-2 lg:min-w-[17rem] lg:max-w-[17rem]'>
+          <FacebookPage />
           <Genres className='hidden md:block' />
           <Recommendation />
         </div>
