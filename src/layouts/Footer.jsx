@@ -18,14 +18,14 @@ export default function Footer() {
                 that you like.
               </p>
               <p className=' text-sm lg:text-base leading-6 pt-2'>
-                This website using public api{' '}
+                This website using public api
                 <a
                   href='https://github.com/riimuru/gogoanime-api'
                   target='_blank'
                   rel='noreferrer'
                   className=' underline text-slate-100'
                 >
-                  Gogonomi-api
+                  Gogoanime-api
                 </a>
               </p>
               <div className=' text-sm py-3'>
